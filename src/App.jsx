@@ -5,26 +5,15 @@ import './App.css'
 import Home from './Home'
 
 function App() {
-  const [count, setCount] = useState(100)
-  const [co, setCo] = useState(1)
-  
-  useEffect( ()=> { 
-    // setCount(count-10)
-    console.log("useEffect worked")},[count])
- function Test(){
-console.log("test function call")
-
- }
- Test()
+ 
   return(
-  
 <div>
-  <p>  The count is {count}.</p>
-  <button onClick={()=> setCount(count -2)} > click here 
-</button>
-<button onClick={()=> setCo(co -2)} > click here 
-</button>
 <Home/>
+  <p>  I woulk like to develop new app. This app will tell about to do list.
+     Your daily task will be tracked. You can check your process. 
+     You can take optimal decision after analysis of your performance.
+  </p>
+
 </div>
   )
 }
