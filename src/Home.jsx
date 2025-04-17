@@ -1,3 +1,4 @@
+
 function Home() {
 
   return( 
@@ -8,10 +9,16 @@ function Home() {
 <a href="">Activity</a>
 <a href="">Point</a>
 <a href="">Analysis</a>
-<input type="text" placeholder="Search"></input>
-<button > Ok </button>
+<button > login </button>
+
+<a href="">
+
+  <button>create free account</button>
+
+</a>
 </div>
 </header>
+
 
 
 
@@ -19,3 +26,5 @@ function Home() {
 }
 
 export default Home;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
