@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 
 export default function Activity() {
   return (
-<div style={{display:'flex',flex: 1}}>
+<div>
 <Navbar/>
 <div>Activity file</div>
 </div>

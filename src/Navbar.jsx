@@ -7,18 +7,15 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   return (
-    <header>  
+  <header>  
 <div id="navbar">
-<a href="">Logo</a>
+<Link to="/home">Logo</Link>
 <Link to="/home">Home</Link>
 <Link to="/activity">Activity</Link>
-<a href="">Point</a>
-<a href="">Analysis</a>
+<Link to="/point">Point</Link>
+<Link to="/analysis">Analysis</Link>
 <button > login </button>
-
-<a href="">
-  <button>create free account</button>
-</a>
+ <button>create free account</button>
 </div>
 </header>
   )
