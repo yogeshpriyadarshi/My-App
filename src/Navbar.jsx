@@ -14,6 +14,7 @@ export default function Navbar() {
 <Link to="/activity">Activity</Link>
 <Link to="/point">Point</Link>
 <Link to="/analysis">Analysis</Link>
+<Link to="/user">User</Link>
 <Link to="/login"><button > login </button></Link>
 <Link to="/createAccount"><button>create free account</button></Link>
 
