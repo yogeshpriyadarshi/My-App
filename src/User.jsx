@@ -25,7 +25,7 @@ useEffect(() => {
  }, [id]);
  
  async function getuserdata(){
-let response = await axios.get(`http://127.00.1:3000/users/${id}`)
+let response = await axios.get(`http://127.00.1:5000/users/${id}`)
 console.log(response);
 setuserData([response.data]);
 
