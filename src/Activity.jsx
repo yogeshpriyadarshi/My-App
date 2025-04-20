@@ -5,7 +5,7 @@ export default function Activity() {
   return (
 <div>
 <Navbar/>
-<div>Activity file</div>
+<div id="idx" > Activity file </div>
 </div>
   )
 }

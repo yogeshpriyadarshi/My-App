@@ -10,13 +10,13 @@ export default function Navbar() {
 <Link to="/home">
  <>   <img src="src\assets\react.svg" alt="logo" /> </>  
  </Link>
-<Link to="/home">Home</Link>
-<Link to="/activity">Activity</Link>
-<Link to="/point">Point</Link>
-<Link to="/analysis">Analysis</Link>
-<Link to="/user">User</Link>
-<Link to="/login"><button > login </button></Link>
-<Link to="/createAccount"><button>create free account</button></Link>
+<Link className="tab" to="/home">Home</Link>
+<Link className="tab" to="/activity">Activity</Link>
+<Link className="tab" to="/point">Point</Link>
+<Link className="tab" to="/analysis">Analysis</Link>
+<Link className="tab" to="/user">User</Link>
+<Link className="tab" to="/login"><button > login </button></Link>
+<Link className="tab" to="/createAccount"><button>create free account</button></Link>
 
 </div>
 </header>

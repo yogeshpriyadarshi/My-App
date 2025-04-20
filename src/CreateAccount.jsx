@@ -1,64 +1,69 @@
 import React, {useState} from 'react';
 import Navbar from './Navbar'
 import axios from 'axios';
+import './CreateAccount.css'
 
 export default function CreateAccount() {
-const [name, setName] =useState("");
-const [age, setAge] =useState("");
-const [contact, setContact] =useState("");
-const [fullname, setFullname] = useState("");
-const [email, setEmail] = useState("");
+  const [user, setUser] = useState({Name:"",email:"", pass:"",number: "" });
 
-const handleSubmit =(e)=> {
+// const [name, setName] =useState("");
+// const [pass, setPass] =useState("");
+// const [contact, setContact] =useState("");
+// const [fullname, setFullname] = useState("");
+// const [email, setEmail] = useState("");
+// const [gender, setGender] = useState('');
+
+const handleSubmit = async (e)=> {
      e.preventDefault();
-     let payload={ 
-      name: name,
-      age: age,
-      contact: contact,
-      email: email
-     }
-     axios.post("localhost:3000/user",payload);
-    console.log("name:", name);
-    console.log("Age:", age);
-    setFullname(name);
+    try{ // http://localhost:5000/user
+      const res = await axios.post("http://localhost:5000/user",user);
+      console.log(res.data);
+      setUser({Name:"",email:"", pass:"",number: "" })
+      alert("Creation of account is successful.")
+    }catch(err){
+      console.error("error sending", err);
+    }
+  
 };
 
   return(
     <>
     <Navbar/>
-    <div>
+    <div id="idx">
         <h1>Create Free Account! </h1>
-        <h3> hello {fullname} </h3>
          <form  onSubmit={handleSubmit} > 
           <div>
           <label >Name: </label> <br/>
           <input type="text" 
-                 value={name}
-                 onChange={(e)=> setName(e.target.value)}
-                placeholder="Enter Name"
-                required />
+                 value={user.Name}
+                 onChange={(e)=> setUser({...user, Name: e.target.value})}
+                 placeholder="Enter Name"
+                 required />
           </div>
+
           <div>
-          <label>Age:</label> <br/>
-          <input type="number" 
-          value={age}
-          onChange={(e)=> setAge(e.target.value)}
-          placeholder="Age" />
+            <label>Email:</label> <br/>
+            <input type="email" placeholder="Enter valid Email" value={user.email} required
+            onChange={(e)=>setUser({...user, email: e.target.value}) } />
+          </div>
+
+          <div>
+          <label> Set your Password:</label> <br/>
+          <input type="password" 
+          value={user.pass}
+          onChange={(e)=> setUser({...user, pass:e.target.value})}
+          placeholder="Password" />
           </div>
           <div>
             <label>Contact Number:</label> <br/>
             <input type="number" 
                    placeholder='Contact Number'
-                   value={contact}
-                   onChange={(e)=> setContact(e.target.value) }
+                   value={user.number}
+                   onChange={(e)=> setUser({...user, number:e.target.value}) }
             />
-          </div>
-          <div>
-            <label>Eamail:</label> <br/>
-            <input type="email" placeholder="Enter valid Email" value={email} required
-            onChange={(e)=>setEmail(e.target.value) } />
-          </div>
-          <button > click me </button>
+          </div>  
+      <br />
+          <button type="submit">Submit</button>
         </form>
     </div>
     </>

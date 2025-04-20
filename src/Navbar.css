@@ -1,7 +1,12 @@
 #navbar{
-    background-color:grey;
+    color:red;
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     height: 40px;
+    text-decoration: none;
   } 
+  .tab{
+    text-decoration: none;
+  }
