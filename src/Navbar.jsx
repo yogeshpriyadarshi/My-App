@@ -18,8 +18,6 @@ export default function Navbar() {
 <Link to="/login"><button > login </button></Link>
 <Link to="/createAccount"><button>create free account</button></Link>
 
-
- 
 </div>
 </header>
   )
