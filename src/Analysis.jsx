@@ -6,7 +6,7 @@ export default function Analysis() {
     <>
     <Navbar/>
     
-    <div id="idx"> Analysis your point and take optimal decision.</div>
+    <div > Analysis your point and take optimal decision.</div>
     
     </>
     

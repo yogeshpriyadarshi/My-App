@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+// import './index.css'
 import App from './App.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './About.jsx';
@@ -10,7 +10,6 @@ import Point from './Point.jsx';
 import Analysis from './Analysis.jsx';
 import Login from './Login.jsx';
 import CreateAccount from './CreateAccount.jsx';
-import User from './User.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -22,8 +21,6 @@ createRoot(document.getElementById('root')).render(
       <Route path="/home" element={<Home />} />
       <Route path="/activity" element={<Activity />} />
       <Route path="/point" element={<Point />} />
-      <Route path="/user" element={<User />} />
-
       <Route path="/analysis" element={<Analysis />} />
       <Route path="/login" element={<Login />} />
       <Route path="/createAccount" element={<CreateAccount />} />

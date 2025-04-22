@@ -1,3 +1,18 @@
 #idx{
-    background-color: rgb(112, 112, 235);
+    background-color: blue;
+    border-style: solid;
+    text-align: center;
+}
+.in{
+height: 25px;
+width: 250px;
+border-radius: 10px;
+}
+
+#sumbit_button{
+height: 25px;
+width: 100px;
+background-color: red;
+border-radius: 10px;
+
 }

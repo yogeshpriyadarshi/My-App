@@ -10,3 +10,11 @@
   .tab{
     text-decoration: none;
   }
+
+  .id_button{
+    font-size: 25px;
+    height: 35px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: aqua;
+  }

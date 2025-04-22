@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
- import './Navbar.css'
+import './Navbar.css'
 
 
 export default function Navbar() {
@@ -14,9 +14,8 @@ export default function Navbar() {
 <Link className="tab" to="/activity">Activity</Link>
 <Link className="tab" to="/point">Point</Link>
 <Link className="tab" to="/analysis">Analysis</Link>
-<Link className="tab" to="/user">User</Link>
-<Link className="tab" to="/login"><button > login </button></Link>
-<Link className="tab" to="/createAccount"><button>create free account</button></Link>
+<Link className="tab" to="/login"><button className="id_button" > login </button></Link>
+<Link className="tab" to="/createAccount"><button className="id_button">create account</button></Link>
 
 </div>
 </header>
