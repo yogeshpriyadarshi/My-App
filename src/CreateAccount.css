@@ -1,16 +1,28 @@
 #idx{
-    background-color: blue;
-    border-style: solid;
+    height: 420Px;
+    width: 450px;
+    border: 2px solid black;
+    border-radius: 10px;
+    align-items: center;
     text-align: center;
+    margin: 0 atuo;
+}
+#outer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 .in{
-height: 25px;
-width: 250px;
+    background-color: aqua;
+height: 30px;
+width: 300px;
 border-radius: 10px;
+margin: 5px;
 }
 
 #sumbit_button{
-height: 25px;
+height: 35px;
 width: 100px;
 background-color: red;
 border-radius: 10px;

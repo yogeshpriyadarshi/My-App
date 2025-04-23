@@ -1,7 +1,40 @@
-#box{
-
-    height: 500px;
+#login_a{
+    padding: 5px;
+    height: 350px;
     width: 350px;
-    border-style: solid;
+    margin: 0 auto;
     text-align: center;
+    font-family: 15px;
+    border-radius: 10px;
+    border: 2px solid black;
+
+}
+#login_b{
+background-color: rgb(94, 94, 182);
+height: 40px;
+width: 100px;
+border-radius: 10px;
+font-size: 20px;
+
+}
+#login_c{
+    height: 100vh;
+    width: 100vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.login_in{
+    font-size: 20px;
+    height: 30px;
+    width: 300px;
+    border-radius:10px;
+    background-color: aqua;
+}
+.login_class{
+    font-size: 35px;
+
 }

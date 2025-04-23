@@ -23,15 +23,21 @@ setuserData([response.data]);
   return (
     <>
      <Navbar/>
-    <div id="box"> Users can access their data by summiting their own ID.
-    ID:  
-    <input type="number" value={idx} onChange={ (e)=> setIdx(e.target.value)} placeholder='Enter your Id.' />
-    <button onClick={ () => setId(idx) } > clik me </button>
-<br/> <br/> <br/>
-    {userData?.map((a)=> {  
-        
-    } ) }     
-       </div> 
+      
+      <div id="login_c">     
+
+     <div id="login_a">
+      <level > <p className ="Login_class" > Email </p></level>
+      <input className='login_in' type="email"  />
+      <br/><br/>
+      <level > <p className ="Login_class" > Password </p></level>
+      <input className='login_in' type="password"  />
+      <br/><br/>
+      <button id="login_b" type="submit"> Log in </button>
+
+      </div>
+     </div>
+    
     </>
   )
 }

@@ -20,7 +20,7 @@ const handleSubmit = async (e)=> {
   return(
     <>
     <Navbar/>
-    
+    <div id="outer" >    
     <div id="idx">
         <h1>Create Free Account! </h1>
          <form  onSubmit={handleSubmit} > 
@@ -58,6 +58,7 @@ const handleSubmit = async (e)=> {
       <br />
           <button id="sumbit_button" type="submit">Submit</button>
         </form>
+    </div>
     </div>
     </>
    
