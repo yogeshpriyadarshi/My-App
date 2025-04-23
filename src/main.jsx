@@ -5,7 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './About.jsx';
 import Home from './Home.jsx';
 import Activity from './Activity.jsx';
-import Point from './Point.jsx';
+import Game from './Gmae.jsx';
+
 import Analysis from './Analysis.jsx';
 import Login from './Login.jsx';
 import CreateAccount from './CreateAccount.jsx';
@@ -18,7 +19,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/about" element={<About/>} />
       <Route path="/home" element={<Home />} />
       <Route path="/activity" element={<Activity />} />
-      <Route path="/point" element={<Point />} />
+      <Route path="/game" element={<Game/>} />
       <Route path="/analysis" element={<Analysis />} />
       <Route path="/login" element={<Login />} />
       <Route path="/createAccount" element={<CreateAccount />} />

@@ -3,8 +3,7 @@
    background-color: rgb(180, 93, 93);
     text-align: center;
     border-style: solid;
-    border-radius: 10px;
-    
+    border-radius: 10px;  
 }
 #Activity_y
 {
@@ -13,8 +12,6 @@
     text-align: center;
     border-style: solid;
     border-radius: 10px;
-
-    
 }
 .work{
 
@@ -26,8 +23,8 @@
     padding: 3px;
     display: inline-block;
     border-radius: 10px;
-
 }
+
 p{
     font-size: 20px;
 }

@@ -1,0 +1,20 @@
+.class_a{
+    font-size: 10px;
+height: 100px;
+width: 100px;
+margin: 5px;
+background-color: rgb(218, 112, 112);
+border-radius: 10px;
+
+}
+#id_a{
+    display: flex;
+    align-items: center;
+    margin:0 auto;
+    height: 100vh;
+
+}
+#id_b{
+    margin:0 auto;
+    text-align: center;
+}

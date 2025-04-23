@@ -1,8 +1,6 @@
 #home_a{
-height: 80px;
-font-size: 25px;
-background-color:pink;
-border: 2px solid black;
-border-radius: 10px;
-text-align: center;
+    background-color: rgb(180, 93, 93);
+    text-align: center;
+    border-style: solid;
+    border-radius: 10px;  
 }

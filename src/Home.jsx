@@ -8,7 +8,7 @@ function Home() {
     <>
 <Navbar/>
 
-<div id="home_a"> <h1>Welcome to home page.</h1> </div>
+<div id="home_a"> <h1>  Welcome to home page. </h1>  </div>
 
 
 </>
