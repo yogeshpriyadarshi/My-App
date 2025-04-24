@@ -6,10 +6,11 @@ import About from './About.jsx';
 import Home from './Home.jsx';
 import Activity from './Activity.jsx';
 import Game from './Game.jsx';
-
 import Analysis from './Analysis.jsx';
 import Login from './Login.jsx';
 import CreateAccount from './CreateAccount.jsx';
+import User from './User.jsx';
+
 
 createRoot(document.getElementById('root')).render(
 <StrictMode>
@@ -23,6 +24,8 @@ createRoot(document.getElementById('root')).render(
       <Route path="/analysis" element={<Analysis />} />
       <Route path="/login" element={<Login />} />
       <Route path="/createAccount" element={<CreateAccount />} />
+      <Route path="/user" element={<User/>} />
+
     </Routes>
   </BrowserRouter>
   </StrictMode>

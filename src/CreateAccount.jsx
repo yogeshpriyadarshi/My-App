@@ -11,7 +11,7 @@ const handleSubmit = async (e)=> {
     try{ 
       const res = await axios.post("http://localhost:5000/user",user);
       console.log(res.data);
-      setUser({Name:"",email:"", pass:"",number: "" })
+      setUser({Name:"",email:"", pass:"",number: "" });
       alert("Creation of account is successful.")
     }catch(err){
       console.error("error sending", err);

@@ -1,6 +1,6 @@
 #login_a{
     padding: 5px;
-    height: 350px;
+    height: 300px;
     width: 350px;
     margin: 0 auto;
     text-align: center;
@@ -36,5 +36,4 @@ font-size: 20px;
 }
 .login_class{
     font-size: 35px;
-
 }
