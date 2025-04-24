@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './About.jsx';
 import Home from './Home.jsx';
 import Activity from './Activity.jsx';
-import Game from './Gmae.jsx';
+import Game from './Game.jsx';
 
 import Analysis from './Analysis.jsx';
 import Login from './Login.jsx';

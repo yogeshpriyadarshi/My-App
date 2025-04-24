@@ -1,10 +1,18 @@
 .class_a{
-    font-size: 10px;
+    font-size: 25px;
 height: 100px;
 width: 100px;
 margin: 5px;
 background-color: rgb(218, 112, 112);
 border-radius: 10px;
+flex:1;
+text-align: center;
+line-height: 100px;
+
+}
+.class_b{
+height:50px;
+width: 50px;
 
 }
 #id_a{
