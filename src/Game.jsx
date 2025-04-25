@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import './Game.css'
 
 export default function Game() {
-  const check= [ "abc","adg",'aci','bch','cfi','ceg','def','ghi'];
+  const check= [ "abc","adg",'aei','beh','cfi','ceg','def','ghi'];
 
   // let player1 = useRef([ ]);
   // let player2 = useRef([ ]);
@@ -18,6 +18,7 @@ export default function Game() {
     setValue({a:"",b:"",c:"",d:"",e:"",f:"",g:"",h:"",i:"" });
     setPlayer1([]);
     setPlayer2([]);
+    setTurn(0);
   }
   
   useEffect(()=> {
@@ -34,15 +35,14 @@ export default function Game() {
               q++;
               if(q===3)
               {
-                console.log("player1 is winner!")
-                // return true;
+                setTimeout(  function() { alert("player1 is winner! Game can be reseted. ") }, reSetAll(),
+                500);
               }
             } 
           }
     }
       }
-
-
+// if not one win then what is logic.
 
   },[player1]);
 
@@ -61,8 +61,10 @@ export default function Game() {
               q++;
               if(q===3)
               {
-                console.log("player2 is winner!")
-                // return true;
+                
+                setTimeout(  function() { alert("player2 is winner! Game can be reseted. ") }, reSetAll(),
+                500);
+              
               }
             } 
           }
@@ -70,32 +72,26 @@ export default function Game() {
       }
   },[player2]);
 
-
-
+  const [turn, setTurn] =useState(0);
   const t = useRef(0);
   function ClickHandler(res)
   {
     if(value[res]){
       return;
     }
-    if(t.current===0)
+    if(turn===0)
     {
+      // alert("Shayam");
       setValue({...value, [res]:"X"});
-      // player1.current.push(res);
-      // console.log("X",player1,player1.length);
+      // alert("Ram");
 
-      setPlayer1([...player1, res ]);
-      //  console.log("X",player1,player1.length);
-      // console.log(check);
-    //  winning conditions
-         t.current=1;
+      setPlayer1([...player1, res ]); 
+         setTurn(1);
     }else{
       setValue({...value, [res]:"O"});
       setPlayer2([...player2, res]);
-      // player2.current.push(res);
-
-      // console.log("O",player2);
-      t.current=0;
+     
+      setTurn(0);
     }
   }
   return (
@@ -103,7 +99,11 @@ export default function Game() {
     <Navbar/>
 
      <div id="id_a"> 
-      <div id="id_b"> <h1> Play Tic Tic  Toe</h1>
+     
+
+      <div id="id_b"> <h1> Play Tic Tic  Toe</h1>  
+      <div id="id_c">   <h1>Player1:X </h1>       <h1>Player2 :O</h1>      </div>
+     
       <div style ={ {display:"flex",flex:1,flexDirection:"row"}}>  
      <div id="a" className='class_a' onClick={(  )=> ClickHandler("a")}> {value["a"]}  </div>
      <div id="b" className='class_a' onClick={(  )=> ClickHandler("b")}> {value["b"]}  </div>

@@ -25,6 +25,11 @@ background-color: brown;
 
 }
 #id_b{
+    width: 500px;
     margin:0 auto;
     text-align: center;
+}
+#id_c{
+    display: flex;
+    justify-content: space-around;
 }
