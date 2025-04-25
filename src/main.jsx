@@ -10,13 +10,14 @@ import Analysis from './Analysis.jsx';
 import Login from './Login.jsx';
 import CreateAccount from './CreateAccount.jsx';
 import User from './User.jsx';
+import Calculator from './Calculator.jsx';
 
 
 createRoot(document.getElementById('root')).render(
 <StrictMode>
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Login />} />
       <Route path="/about" element={<About/>} />
       <Route path="/home" element={<Home />} />
       <Route path="/activity" element={<Activity />} />
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/login" element={<Login />} />
       <Route path="/createAccount" element={<CreateAccount />} />
       <Route path="/user" element={<User/>} />
+      <Route path="/calculator" element={<Calculator/>} />
 
     </Routes>
   </BrowserRouter>

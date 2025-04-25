@@ -1,0 +1,13 @@
+.class_a{
+height: 75px;
+width: 75px;
+background-color: red;
+font-size: 30px;
+
+}
+#id_a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

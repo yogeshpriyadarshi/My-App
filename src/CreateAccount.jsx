@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom'
+
 import Navbar from './Navbar'
 import axios from 'axios';
 import './CreateAccount.css'
@@ -19,8 +21,16 @@ const handleSubmit = async (e)=> {
 };
   return(
     <>
-    <Navbar/>
-    <div id="outer" >    
+    {/* <Navbar/> */}
+  
+
+    <div id="outer" >  
+
+      <div>
+      <Link className="tab" to="/login"> <button className="id_button" > login </button></Link>
+      <Link className="tab" to="/createAccount"> <button className="id_button">create account</button></Link>
+        </div>  
+   
     <div id="idx">
         <h1>Create Free Account! </h1>
          <form  onSubmit={handleSubmit} > 

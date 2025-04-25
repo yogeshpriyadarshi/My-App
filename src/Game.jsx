@@ -1,9 +1,12 @@
 import React, { useState,useRef, useEffect } from 'react'
 import Navbar from './Navbar'
-import './Game.css'
+// import Style from './Game.module.css'
+ import './Game.css';
+
 
 export default function Game() {
-  const check= [ "abc","adg",'aei','beh','cfi','ceg','def','ghi'];
+
+  const check= ["abc","adg",'aei','beh','cfi','ceg','def','ghi'];
 
   // let player1 = useRef([ ]);
   // let player2 = useRef([ ]);
@@ -35,8 +38,9 @@ export default function Game() {
               q++;
               if(q===3)
               {
-                setTimeout(  function() { alert("player1 is winner! Game can be reseted. ") }, reSetAll(),
-                500);
+                alert("win");
+                // setTimeout(  function() { alert("player1 is winner! Game can be reseted. ") }, reSetAll(),
+                // 500);
               }
             } 
           }
@@ -44,7 +48,7 @@ export default function Game() {
       }
 // if not one win then what is logic.
 
-  },[player1]);
+  },[value]);
 
 
   useEffect(()=> {
@@ -61,16 +65,16 @@ export default function Game() {
               q++;
               if(q===3)
               {
-                
-                setTimeout(  function() { alert("player2 is winner! Game can be reseted. ") }, reSetAll(),
-                500);
+                alert("win");
+                // setTimeout(  function() { alert("player2 is winner! Game can be reseted. ") }, reSetAll(),
+                // 500);
               
               }
             } 
           }
     }
       }
-  },[player2]);
+  },[value]);
 
   const [turn, setTurn] =useState(0);
   const t = useRef(0);

@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 #login_a{
     padding: 5px;
     height: 300px;
@@ -24,6 +29,7 @@ font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
 }
 
@@ -35,5 +41,5 @@ font-size: 20px;
     background-color: aqua;
 }
 .login_class{
-    font-size: 35px;
+    font-size: 25px;
 }

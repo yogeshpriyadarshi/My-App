@@ -1,53 +1,63 @@
 import { useEffect,useState } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-import Navbar from './Navbar';
+
+// import Navbar from './Navbar';
 import  './Login.css';
 
-export default function Login() {
 
+export default function Login() {
+  const navigate= useNavigate();
+
+   
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
- const [error , setError] =useState();
+//  const [error , setError] =useState();
+
+function test() {
+
+  navigate("/game");
+}
 
 async function ClickHandler(){
   console.log(email)
   console.log(password)
-  const res = await axios.get("http://localhost:5000/users");
- console.log(res.data);
- console.log(res.data[7].email)
+  const res = await axios.post("http://localhost:5000/login",{email,password});
+ console.log(res.data); 
+ if(res.data.success){
+ setEmail("");
+ setPassword("");
 
- for(let k=0; k<8;k++)
- {
- if (email=== res.data[k].email && password===res.data[k].password){
-  console.log("email is:",email);
-  console.log("password is:",password);
-  alert("Login successful");
-  return true;
+  navigate("/home");
+ }else{
+  alert(res.data.message);
  }
-}
-return false;
+
 }
 
   return (
     <>
-     <Navbar/>
-      
-      <div id="login_c">     
-
+     {/* <Navbar/> */}
+      <div id="login_c"> 
+        <div>     
+        <Link className="tab" to="/login"><button className="id_button" > login </button></Link>
+        <Link className="tab" to="/createAccount"><button className="id_button">create account</button></Link>
+          </div>    
      <div id="login_a">
-       <p className ="Login_class" > Email </p>
-      <input className='login_in' type="email"value={email} placeholder='Enter Email' 
-      onChange={(e)=> setEmail(e.target.value)}   />
-      <br/>
-       <p className ="Login_class"  > Password </p>
+        <h1>Login</h1>   <br/>
+       <p className ="Login_class" > Email </p>   
+      <input className='login_in' type="email" value={email} placeholder='Enter Email' 
+      onChange={(e)=> setEmail(e.target.value)}   /> 
+      <br/>       <br/>
+       <p className ="Login_class"  > Password </p>   
       <input className='login_in' type="password" placeholder="password"
-      onChange={(e)=>setPassword(e.target.value)} />
-      <br/><br/>
-      <Link className="tab" to="/user" onClick={()=> ClickHandler() }   >Login</Link>
+      onChange={(e)=>setPassword(e.target.value)} />   <br/>  <br/>
+      <br/>
+      {/* <Link className="tab"  onClick={()=> ClickHandler() }   >Login</Link> */}
 
-      {/* <button id="login_b" type="submit" onClick={()=> ClickHandler() } > Log in </button> */}
+       <button id="login_b" type="submit" onClick={()=> ClickHandler() } > Log in </button> 
+
 
       </div>
      </div>
