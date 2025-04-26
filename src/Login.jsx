@@ -2,43 +2,38 @@ import { useEffect,useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
 
-
-// import Navbar from './Navbar';
 import  './Login.css';
-
 
 export default function Login() {
   const navigate= useNavigate();
-
-   
+ 
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
-//  const [error , setError] =useState();
-
-function test() {
-
-  navigate("/game");
-}
 
 async function ClickHandler(){
+
   console.log(email)
   console.log(password)
+
   const res = await axios.post("http://localhost:5000/login",{email,password});
- console.log(res.data); 
+ console.log(res.data);
+
  if(res.data.success){
  setEmail("");
  setPassword("");
+ localStorage.setItem( 'token','token');
+ localStorage.setItem( 'name', res.data.user.name);
 
-  navigate("/home");
+ navigate('/home');
+
+  // navigate("/home", res.data);
  }else{
   alert(res.data.message);
  }
-
 }
 
   return (
     <>
-     {/* <Navbar/> */}
       <div id="login_c"> 
         <div>     
         <Link className="tab" to="/login"><button className="id_button" > login </button></Link>
@@ -54,7 +49,6 @@ async function ClickHandler(){
       <input className='login_in' type="password" placeholder="password"
       onChange={(e)=>setPassword(e.target.value)} />   <br/>  <br/>
       <br/>
-      {/* <Link className="tab"  onClick={()=> ClickHandler() }   >Login</Link> */}
 
        <button id="login_b" type="submit" onClick={()=> ClickHandler() } > Log in </button> 
 
