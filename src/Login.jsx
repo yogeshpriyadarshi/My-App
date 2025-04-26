@@ -1,32 +1,38 @@
-import { useEffect,useState } from 'react'
+import { useContext, useEffect,useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
+import {AuthContext} from './App'
 
 import  './Login.css';
 
 export default function Login() {
   const navigate= useNavigate();
- 
+ const {state,dispatch}= useContext(AuthContext)
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
 
+
 async function ClickHandler(){
+
 
   console.log(email)
   console.log(password)
 
   const res = await axios.post("http://localhost:5000/login",{email,password});
- console.log(res.data);
+  // const res={data:{
+  //   message:"Login Succefully",
+  //   success:true,
+  //   user:{
+  //     name:"piyush",
+  //     email:"Piyushpriyadarshi329@gmail.com",
+  //     mobile:"987786876"
+  //   }
+  // }}
 
  if(res.data.success){
  setEmail("");
  setPassword("");
- localStorage.setItem( 'token','token');
- localStorage.setItem( 'name', res.data.user.name);
-
- navigate('/home');
-
-  // navigate("/home", res.data);
+ dispatch({type:"LOGIN",user:res.data.user})
  }else{
   alert(res.data.message);
  }

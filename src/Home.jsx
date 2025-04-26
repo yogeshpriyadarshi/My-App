@@ -1,17 +1,19 @@
 import { useLocation, useNavigate} from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useContext } from "react";
 import Navbar from "./Navbar";
 import './Home.css'
+import { AuthContext } from "./App";
 
 function Home() {
   const navigate = useNavigate();
-  const name =localStorage.getItem("name");
+  const {state,dispatch} = useContext(AuthContext)
+
 console.log(name);
 
 
 function logout(){
-  localStorage.clear();
-  navigate('/login')
+  dispatch({type:"LOGOUT"})
+  navigate('/')
     
 }
   // const { name } = location.state || {};
@@ -24,7 +26,7 @@ function logout(){
     <>
 <Navbar/>
 
-<div id="home_a"> <h1>  Welcome to home page Name: {name} </h1>  </div>
+<div id="home_a"> <h1>  Welcome to home page Name: {state?.name} </h1>  </div>
 <button onClick={ logout } >  logout  </button>
 
 
