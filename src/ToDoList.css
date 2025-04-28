@@ -1,0 +1,18 @@
+#todolist_ida{
+    height:100%;
+    border: 2px,solid,black;
+    justify-content: space-around;
+}
+#todolist_idb{
+    text-align: center;
+    color:red;
+}
+#todolist_idc{
+    text-align: center;
+    color:red;
+}
+.todolist_classa{
+    border: 2px,dotted,blueviolet;
+font-size: 30px;
+    background-color:aqua;
+}

@@ -1,7 +1,6 @@
 import React from "react";
 import About from "./About.jsx";
 import Home from "./Home.jsx";
-import Activity from "./Activity.jsx";
 import Game from "./Game.jsx";
 import Analysis from "./Analysis.jsx";
 import Login from "./Login.jsx";
@@ -11,6 +10,7 @@ import Calculator from "./Calculator.jsx";
 import ProtectedRoute from "./ProtectedRoute";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import ToDoList from "./ToDoList.jsx";
 
 export default function App() {
   const navigate = useNavigate();
@@ -26,8 +26,8 @@ export default function App() {
         navigate("/login")
       }
     } else {
-      if(location.pathname==="/login" || location.pathname === "/createAccount" || location.pathname === "/" ||
-        location.pathname==="/login/" || location.pathname==="/createAccount/"
+      if(location.pathname.includes("/login") || location.pathname === "/createAccount" || location.pathname === "/" ||
+         location.pathname==="/createAccount/"
       ){
         navigate("/home");
         console.log("Home page rander");
@@ -42,7 +42,7 @@ export default function App() {
       <Route path="/" element={<Login />} />
       <Route path="/about" element={<About />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/activity" element={<Activity />} />
+      <Route path="/to_do_list" element={<ToDoList />} />
       <Route path="/game" element={<Game />} />
       <Route path="/analysis" element={<Analysis />} />
       <Route path="/login" element={<Login />} />

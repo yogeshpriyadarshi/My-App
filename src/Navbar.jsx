@@ -15,7 +15,7 @@ export default function Navbar() {
 <div id="navbar">
 <Link to="/"> <img src="src\assets\react.svg" alt="logo" />  </Link>
 <Link className="tab" to="/home">Home</Link>
-<Link className="tab" to="/activity">Activity</Link>
+<Link className="tab" to="/to_do_list">To Do List</Link>
 <Link className="tab" to="/game">Game</Link>
 <Link className="tab" to="/analysis">Analysis</Link>
 <Link className="tab" to="/calculator">Calculator</Link>

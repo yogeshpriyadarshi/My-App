@@ -9,9 +9,10 @@
   } 
   #buttion_a{
     height: 40px;
-    width: 40px;
+    width: 100px;
+    font-size: 30px;
     border-radius: 5px;
-    background-color: blue;
+    background-color:red;
   }
   .tab{
     text-decoration: none;
