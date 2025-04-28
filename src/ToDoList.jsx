@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { FaBeer, FaUserAlt,   } from 'react-icons/fa';
+import { MdDeleteForever } from "react-icons/md";
+import Modal from 'react-modal';
+
 import React from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
@@ -7,6 +11,8 @@ import "./ToDoList.css";
 export default function ToDoList() {
   const [date, setDate]=useState("");
   const [inputs, setInputs] = useState([{type: "", value: "", name: "",  }]);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
 
   function typeHandler(e, index) {
     const newInput = [...inputs];
@@ -46,8 +52,15 @@ export default function ToDoList() {
   return (
     <>
       <Navbar />
-      <h1 id="todolist_idc"> To Do List </h1>
+      <MdDeleteForever/>
+      <button onClick={() => setIsOpen(true)}>Open Modal</button>
 
+<Modal isOpen={modalIsOpen} onRequestClose={() => setIsOpen(false)}>
+  <h2>Hello Modal</h2>
+  <button onClick={() => setIsOpen(false)}>Close</button>
+</Modal>
+      <h1 id="todolist_idc"> To Do List </h1>
+      <FaBeer />   <FaUserAlt size={30} color="red" onClick={()=> console.log("user icon")}/>   <MdDeleteForever/>
       <div id="todolist_ida">
         {" "}
         <h1 id="todolist_idb"> Tasks</h1>

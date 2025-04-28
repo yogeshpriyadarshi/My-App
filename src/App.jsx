@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import ToDoList from "./ToDoList.jsx";
+import Profile from "./Profile.jsx";
 
 export default function App() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function App() {
       <Route path="/analysis" element={<Analysis />} />
       <Route path="/login" element={<Login />} />
       <Route path="/createAccount" element={<CreateAccount />} />
-      <Route path="/user" element={<User />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/calculator" element={<Calculator />} />
     </Routes>
   );

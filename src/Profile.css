@@ -1,0 +1,35 @@
+#profile_ida{
+    color: white;
+    text-align: center;
+}
+#profile_idb{
+    display: flex;
+    justify-content: space-around;
+    font-size: 75px;;
+    height: 75px;
+    color: white;
+    background-color:black;
+    text-align: center;
+
+}
+#profile_idc{
+    text-align: center;
+}
+#profile_idd{
+    font-size: 40px;
+    height: 50px;
+    background-color:white;
+    color: black;
+    margin: 10px;
+}
+#profile_ide{
+    font-size: 50px;
+    width: 200px;
+    background-color:white;
+}
+.profile_classa{
+    margin: 5px;
+    height: 30px;
+    width: 300px;
+ border-radius: 10px;
+}
