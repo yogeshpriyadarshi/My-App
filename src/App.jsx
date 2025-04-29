@@ -58,17 +58,16 @@ case "LOGIN":
 }
 
  }
+ 
   useEffect(() => {
     const user = localStorage.getItem("user");
-if(user)
-{
-
-}else{
-  navigate('./')
-}
-    
-    
-  }, [location.pathname]);
+    if (user) {
+      let localUser = JSON.parse(user);
+      dispatch({ type: "LOGIN",   user: localUser } );
+    } else {
+      navigate("/");
+    }  
+  }, []);
 
   return (
     <AuthContext.Provider value={{state,dispatch}} > 
