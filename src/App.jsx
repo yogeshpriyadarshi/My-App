@@ -8,37 +8,50 @@ import CreateAccount from "./CreateAccount.jsx";
 import User from "./User.jsx";
 import Calculator from "./Calculator.jsx";
 import ProtectedRoute from "./ProtectedRoute";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation, } from "react-router-dom";
+
+import { useEffect,createContext} from "react";
 import ToDoList from "./ToDoList.jsx";
 import Profile from "./Profile.jsx";
+
+const AuthContext =createContext();
+export{AuthContext}
+
+
 
 export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  let intialValues = {
+name:undefined,
+email:undefined,
+password:undefined,
+contact:undefined,
+dob:undefined,
+gender:undefined,
+country:undefined,
+city:undefined,
+  }
+ function reducer(state,action){
+switch(action.type){
+case "LOGIN":
+  return;
+  case "LOGOUT":
+    return;
+    default:
+    return;
+}
+
+ }
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
-    if (!token) {
-      if( location.pathname === "/createAccount") {
-        navigate("/createAccount");
-      }else {
-        navigate("/login")
-      }
-    } else {
-      if(location.pathname.includes("/login") || location.pathname === "/createAccount" || location.pathname === "/" ||
-         location.pathname==="/createAccount/"
-      ){
-        navigate("/home");
-        console.log("Home page rander");
-      } else { navigate(location.pathname) }
-   
-    } 
+    
     
   }, [location.pathname]);
 
   return (
+    <AuthContext.provider> 
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/about" element={<About />} />
@@ -51,5 +64,6 @@ export default function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/calculator" element={<Calculator />} />
     </Routes>
+    </AuthContext.provider>
   );
 }
