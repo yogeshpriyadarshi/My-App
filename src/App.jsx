@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import About from "./About.jsx";
 import Home from "./Home.jsx";
 import Game from "./Game.jsx";
@@ -8,9 +8,9 @@ import CreateAccount from "./CreateAccount.jsx";
 import User from "./User.jsx";
 import Calculator from "./Calculator.jsx";
 import ProtectedRoute from "./ProtectedRoute";
-import { Routes, Route, useNavigate, useLocation, } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation,  } from "react-router-dom";
 
-import { useEffect,createContext} from "react";
+import { useEffect,createContext, useContext} from "react";
 import ToDoList from "./ToDoList.jsx";
 import Profile from "./Profile.jsx";
 
@@ -32,38 +32,61 @@ dob:undefined,
 gender:undefined,
 country:undefined,
 city:undefined,
+isLogin:false
   }
+
+  const [ state, dispatch]= useReducer(reducer,intialValues);
+
  function reducer(state,action){
 switch(action.type){
 case "LOGIN":
-  return;
+  let localUser = JSON.stringify({...state, isLogin:true , ...action.user})
+  localStorage.setItem(localUser);
+  return{...state, isLogin:true , ...action.user};
   case "LOGOUT":
-    return;
+    localStorage.clear();
+    return {...state,isLogin:false,name:undefined,
+      email:undefined,
+      password:undefined,
+      contact:undefined,
+      dob:undefined,
+      gender:undefined,
+      country:undefined,
+      city:undefined, };
     default:
-    return;
+      return {...state};
 }
 
  }
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+if(user)
+{
+
+}else{
+  navigate('./')
+}
     
     
   }, [location.pathname]);
 
   return (
-    <AuthContext.provider> 
+    <AuthContext.Provider value={{state,dispatch}} > 
     <Routes>
-      <Route path="/" element={<Login />} />
+      {state?.isLogin?(<>
       <Route path="/about" element={<About />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/calculator" element={<Calculator />} />
       <Route path="/to_do_list" element={<ToDoList />} />
       <Route path="/game" element={<Game />} />
       <Route path="/analysis" element={<Analysis />} />
+      </>):( <>  
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/createAccount" element={<CreateAccount />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/calculator" element={<Calculator />} />
+      </>)}
     </Routes>
-    </AuthContext.provider>
+    </AuthContext.Provider>
   );
 }
