@@ -12,7 +12,9 @@ export default function Profile() {
   return (
     <>
       <div id="profile_idb">
-        <div id="profile_ida"> DO IT </div>
+       <Link id="profile_ida"  to="/home">
+                  DO IT
+                </Link> 
         Profile
         <button id="profile_ide" onClick={logout}>
           {" "}
@@ -43,7 +45,7 @@ export default function Profile() {
           <br />
           <label>Date of Birth:</label>
           <br />
-          <input className="profile_classa" type="text" placeholder="Email" />
+          <input className="profile_classa" type="date" placeholder="Email" />
           <br />
           <label> Gender: </label> <br />
           <select className="profile_classa">
