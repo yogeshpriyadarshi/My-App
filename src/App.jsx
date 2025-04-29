@@ -41,7 +41,7 @@ isLogin:false
 switch(action.type){
 case "LOGIN":
   let localUser = JSON.stringify({...state, isLogin:true , ...action.user})
-  localStorage.setItem(localUser);
+  localStorage.setItem("user",localUser);
   return{...state, isLogin:true , ...action.user};
   case "LOGOUT":
     localStorage.clear();
@@ -60,7 +60,7 @@ case "LOGIN":
  }
  
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    let user = localStorage.getItem("user");
     if (user) {
       let localUser = JSON.parse(user);
       dispatch({ type: "LOGIN",   user: localUser } );

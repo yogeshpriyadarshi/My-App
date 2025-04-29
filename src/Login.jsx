@@ -3,10 +3,11 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Login.css";
+import { AuthContext } from "./App";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [state, dispatch] = useContext();
+  const {state, dispatch} = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,9 +25,11 @@ export default function Login() {
     if (res.data.success) {
       setEmail("");
       setPassword("");
-      localStorage.setItem("token", "token");
       console.log(res.data);
-      localStorage.setItem("user", res.data);
+      const user=JSON.stringify(res.data)
+      localStorage.setItem("user", user);
+      dispatch({type:"LOGIN", user:res.data})
+     
 
       navigate("/home");
 
