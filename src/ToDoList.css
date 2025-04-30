@@ -5,6 +5,8 @@
     justify-content: space-around;
 }
 #todolist_idb{
+    display: flex;
+    flex-direction:column;
     text-align: center;
     color:red;
 }
@@ -12,6 +14,32 @@
     text-align: center;
     color:red;
 }
+#todolist_idd{
+    /* border: 2px,solid,black; */
+   border-radius: 5px;
+    z-index: 10;
+    height: 200px;
+    width: 200px;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+    color:red;
+    background-color:white;
+}
+#todolist_ide{
+    z-index: 1;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   right: 0;
+   bottom: 0;
+left: 0;
+top: 0;
+background-color: rgba(0,0,0,0.5);  
+}
+
+
 .todolist_classa{
     border: 2px,dotted,blueviolet;
 font-size: 30px;

@@ -32,7 +32,8 @@ dob:undefined,
 gender:undefined,
 country:undefined,
 city:undefined,
-isLogin:false
+isLogin:false,
+isLoading:true
   }
 
   const [ state, dispatch]= useReducer(reducer,intialValues);
@@ -42,10 +43,14 @@ switch(action.type){
 case "LOGIN":
   let localUser = JSON.stringify({...state, isLogin:true , ...action.user})
   localStorage.setItem("user",localUser);
-  return{...state, isLogin:true , ...action.user};
+  return{...state, isLogin:true ,isLoading:false, ...action.user};
+  case "UPDATEPROFILE":
+    let updatedUser = JSON.stringify({...state, isLogin:true , ...action.user})
+    localStorage.setItem("user",updatedUser);
+    return{...state, isLogin:true , isLoading:false, ...action.user};
   case "LOGOUT":
     localStorage.clear();
-    return {...state,isLogin:false,name:undefined,
+    return {...state,isLogin:false, isLoading:false, name:undefined,
       email:undefined,
       password:undefined,
       contact:undefined,
@@ -68,7 +73,11 @@ case "LOGIN":
       navigate("/");
     }  
   }, []);
+if(state.isLoading)
+{ <>  
+ <p> loading.... </p>
 
+</>  }
   return (
     <AuthContext.Provider value={{state,dispatch}} > 
     <Routes>

@@ -13,14 +13,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   async function ClickHandler() {
-    console.log("sending email and passwoerd to backend",email,password);
 
     const res = await axios.post("http://localhost:5000/login", {
       email,
       password,
     });
 
-    console.log("receive data from backned after login.",res.data);
 
     if (res.data.success) {
       setEmail("");

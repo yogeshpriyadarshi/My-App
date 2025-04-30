@@ -9,7 +9,6 @@ function Home() {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(AuthContext);
 
-  console.log("State dispatch data form complete app",state);
 
   return (
     <>

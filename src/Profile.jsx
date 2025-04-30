@@ -6,10 +6,8 @@ import axios from "axios";
 import "./Profile.css";
 export default function Profile() {
   const { state, dispatch } = useContext(AuthContext);
-  console.log("State dispatch data form complete app",state);
   const [userprofile, setUserprofile] = useState(state);
 
-  console.log("userprofile change", userprofile);
   const navigate = useNavigate();
 
   function changeHander(e, key) {
@@ -25,26 +23,20 @@ export default function Profile() {
     navigate("/");
   }
 
- async function updateProfile() {
-  alert("updating")
-  console.log("sending date to backend",userprofile);
-     let res = await axios.post("http://localhost:5000/updateprofile",userprofile);
-    //  call the api   
+ async function updateProfilefun() {
+  console.log("updatprofile function calll")
+     let res = await axios.post("http://localhost:5000/updateprofile",{...userprofile, dob: userprofile.dob.slice(0,10)});
+    //  call the api  
+    console.log("update upi call");
+     console.log("data from backend",res.data); 
+     
+    if (res.data.success) {
       dispatch({type:"UPDATEPROFILE", user:res.data.user})
-
-    console.log("reqest data return for backend",res);
-   alert("backend message!");
-
-    // if (res.data.success) {
-    //   console.log("update response",res);
-    //   // dispatch({type:"UPDATEPROFILE", user:res.data.user})
-    //   alert("user profile is  updated successfully");
-    // }else{
-    //   alert("user profile is not updated");
-    // }
-    // respons successfull
-    // dispatch updateprofile
-    // allter update successfully
+      alert("user profile is  updated successfully");
+    }else{
+      alert("user profile is not updated");
+    }
+   
 
   //   let payload={
   //     "name": "mk",
@@ -73,8 +65,8 @@ export default function Profile() {
         </button>
       </div>
       <div id="profile_idc">
-        <form>
-          <label>Name:</label>
+        
+          <label>Nameee:</label>
           <br />
           <input
             className="profile_classa"
@@ -120,7 +112,7 @@ export default function Profile() {
             className="profile_classa"
             type="date"
             placeholder="Email"
-            value={userprofile.dob}
+            value={userprofile.dob?.slice(0,10)}
             onChange={(e) => changeHander(e, "dob")}
           />
           <br />
@@ -156,12 +148,12 @@ export default function Profile() {
             onChange={(e)=>changeHander(e,"city")} 
           />
           <br />
-          <button id="profile_idd" onClick={() => updateProfile()}>
+          <button id="profile_idd" onClick={() => updateProfilefun()}>
             {" "}
             Save Change{" "}
           </button>
           <br />
-        </form>
+
       </div>
     </>
   );
