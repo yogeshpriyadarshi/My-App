@@ -27,7 +27,7 @@ export default function App() {
 name:undefined,
 email:undefined,
 password:undefined,
-contact:undefined,
+mobile:undefined,
 dob:undefined,
 gender:undefined,
 country:undefined,
@@ -73,6 +73,7 @@ case "LOGIN":
     <AuthContext.Provider value={{state,dispatch}} > 
     <Routes>
       {state?.isLogin?(<>
+      <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />

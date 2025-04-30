@@ -9,111 +9,69 @@ import Navbar from "./Navbar";
 import "./ToDoList.css";
 
 export default function ToDoList() {
-  const [date, setDate]=useState("");
-  const [inputs, setInputs] = useState([{type: "", value: "", name: "",  }]);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [input,setInput]=useState({title:"", type:"", value:""});
+  
+  function changeHandler(event){
+          setInput({...input, title: event.target.value});
+  }
 
-
-  function typeHandler(e, index) {
-    const newInput = [...inputs];
-    newInput[index].type = e.target.value;
-    setInputs(newInput);
-    console.log(inputs);
+  function typeHandler(e){
+    setInput({...input, type:e.target.value});
   }
-  function valueHandler(e, index) {
-    const newInput = [...inputs];
-    newInput[index].value = e.target.value;
-    setInputs(newInput);
-    console.log(inputs);
+  function valueHandler(e){
+    setInput({...input, value:e.target.value});
   }
-  function changeHandler(event, index) {
-    const newInput = [...inputs];
-    newInput[index].name = event.target.value;
-    setInputs(newInput);
-    console.log(inputs);
-  }
-  function removeHandler(index) {
-    console.log(index);
-    const newInput = [...inputs];
-    newInput.splice(index, 1);
-    console.log(newInput);
-    setInputs(newInput);
-  }
-  function addHandler() {
-    const newInput = [...inputs];
-    newInput.push({ type: "", value: "", name: "" });
-    setInputs(newInput);
-  }
-  async function submitHandler() {
-    console.log(inputs);
-    const res = await axios.post("http://localhost:5000/to_do_list", inputs);
-  }
+  
+  
 
   return (
     <>
       <Navbar />
-      <MdDeleteForever/>
-      <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-<Modal isOpen={modalIsOpen} onRequestClose={() => setIsOpen(false)}>
-  <h2>Hello Modal</h2>
-  <button onClick={() => setIsOpen(false)}>Close</button>
-</Modal>
+ 
       <h1 id="todolist_idc"> To Do List </h1>
-      <FaBeer />   <FaUserAlt size={30} color="red" onClick={()=> console.log("user icon")}/>   <MdDeleteForever/>
+    
       <div id="todolist_ida">
         {" "}
-        <h1 id="todolist_idb"> Tasks</h1>
-        <input
-              id="inputb"
-              type="date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
+<div>   here todo list will be presented.  </div>
+
+          <div className="todolist_classa">
+
+          <label htmlFor="inputa"> Task title :</label>
+            <input
+              id="inputa"
+              type="text"
+              placeholder={`Enter your task `}
+              value={input.title}
+              onChange={(event) => changeHandler(event)}
             />
 
-        {inputs.map((input, index) => (
-          <div key={index} className="todolist_classa">
+
             <label htmlFor="selecta"> Type: </label>
             <select
               id="selecta"
-              value={input.type}
-              onChange={(e) => typeHandler(e, index)}
+              value= {input.type}
+              onChange={(e) => typeHandler(e)}
             >
+              <option value="Regular"> Regular </option>
               <option value="Minor"> Minor </option>
-              <option value="Medium"> Medium </option>
               <option value="Major"> Major </option>
             </select>
+
             <label htmlFor="selectb"> Value: </label>
             <select
               id="selectb"
               value={input.value}
-              onChange={(e) => valueHandler(e, index)}
+              onChange={(e) => valueHandler(e)}
             >
               <option value="Important"> Important </option>
               <option value="Normal"> Normal </option>
               <option value="Hobby"> Hobby </option>
             </select>
-            <label htmlFor="inputa">Name of Task:</label>
-            <input
-              id="inputa"
-              type="text"
-              placeholder={`Enter your task no ${index + 1}`}
-              value={input.name}
-              onChange={(event) => changeHandler(event, index)}
-            />
+           
 
-          
-            <button onClick={() => removeHandler(index)}>
-              {" "}
-              Remove This Task.{" "}
-            </button>
           </div>
-        ))}
-        <button onClick={() => addHandler()}> Add new task.</button>
-        <button type="submit" onClick={() => submitHandler()}>
-          Submit
-        </button>
       </div>
     </>
   );
 }
+

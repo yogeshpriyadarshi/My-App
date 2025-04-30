@@ -1,12 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useContext } from "react";
 import Navbar from "./Navbar";
 import "./Home.css";
+import { AuthContext } from "./App";
+
 
 function Home() {
   const navigate = useNavigate();
-  const name = localStorage.getItem("name");
-  console.log(name);
+  const { state, dispatch } = useContext(AuthContext);
+
+  console.log("State dispatch data form complete app",state);
 
   return (
     <>
@@ -14,7 +17,8 @@ function Home() {
 
       <div id="home_a">
         {" "}
-        <h1> Welcome to home page Name: {name} </h1>{" "}
+        <h1> Welcome to home page: {state.name}  </h1>{" "}
+        
       </div>
     </>
   );

@@ -13,26 +13,21 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   async function ClickHandler() {
-    console.log(email);
-    console.log(password);
+    console.log("sending email and passwoerd to backend",email,password);
 
     const res = await axios.post("http://localhost:5000/login", {
       email,
       password,
     });
-    console.log(res.data);
+
+    console.log("receive data from backned after login.",res.data);
 
     if (res.data.success) {
       setEmail("");
       setPassword("");
-      console.log(res.data);
-      const user=JSON.stringify(res.data)
-      localStorage.setItem("user", user);
-      dispatch({type:"LOGIN", user:res.data})
-     
-
+      dispatch({type:"LOGIN", user:res.data.user})
+      console.log("after merging from action.user in state",state);
       navigate("/home");
-
     } else {
       alert(res.data.message);
     }
