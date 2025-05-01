@@ -1,0 +1,10 @@
+#journal_ida{
+    background-color: red;
+    display: flex;
+    justify-content: space-between;
+}
+#journal_idb{
+    background-color: rgb(205, 221, 61);
+    display: flex;
+    justify-content: space-between;
+}

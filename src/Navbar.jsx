@@ -22,8 +22,8 @@ export default function Navbar() {
         <Link className="tab" to="/game">
           Game
         </Link>
-        <Link className="tab" to="/analysis">
-          Analysis
+        <Link className="tab" to="/journal">
+          Journal
         </Link>
         <Link className="tab" to="/calculator">
           Calculator

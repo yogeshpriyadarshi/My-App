@@ -1,26 +1,24 @@
 #todolist_ida{
     display: flex;
-    height:100%;
     border: 2px,solid,black;
     justify-content: space-around;
 }
 #todolist_idb{
-    display: flex;
-    flex-direction:column;
-    text-align: center;
-    color:red;
+ color:red;
 }
 #todolist_idc{
-    text-align: center;
+    display: flex;
+justify-content: space-between;
     color:red;
+    background-color: aqua;
 }
 #todolist_idd{
-    /* border: 2px,solid,black; */
+    display: flex;
+    flex-direction: column;
    border-radius: 5px;
-    z-index: 10;
-    height: 200px;
-    width: 200px;
-    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.2);
+    height: 500px;
+    width: 400px;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.3);
 
     text-align: center;
     color:red;
@@ -38,10 +36,23 @@ left: 0;
 top: 0;
 background-color: rgba(0,0,0,0.5);  
 }
-
+#todolist_idf{
+size: 100px;
+    color:red;
+}
+#todolist_idg{
+    color:red;
+   }
 
 .todolist_classa{
     border: 2px,dotted,blueviolet;
 font-size: 30px;
     background-color:aqua;
+}
+table{
+    width: 500px;
+}
+td,th{
+    border: 1px,solid,black;
+    text-align: left;
 }

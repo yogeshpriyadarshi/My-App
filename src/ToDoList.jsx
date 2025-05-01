@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import { FaBeer, FaUserAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { SlCalender } from "react-icons/sl";
+
 import Modal from "react-modal";
 import axios from "axios";
 import React from "react";
@@ -16,15 +18,26 @@ import "./ToDoList.css";
 export default function ToDoList() {
   const { state, dispatch } = useContext(AuthContext);
   // console.log("data of profile", state);
+  //  const today = new Date();
+  //  console.log("print new date",today);
+// const currentDate = today.toISOString().slice(0, 10);
   const [isOpen, setIsOpen] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [resTask, setResTask] = useState([]);
+  const date =new Date().toISOString().slice(0,10);
   const [input, setInput] = useState({
     email: state.email,
-    date: "",
+    date: date,
     title: "",
     type: "",
     value: "",
   });
+
+  function dateHandler(event){
+console.log("show date after selecting ", event,"after function",event.toISOString().slice(0,10));
+console.log("to local string date", event)
+setInput({ ...input, date: event.toISOString().slice(0,10) });
+setIsOpen(false);
+  }
 
   function changeHandler(event) {
     setInput({ ...input, title: event.target.value });
@@ -42,33 +55,77 @@ export default function ToDoList() {
   }
   async function submitHandler(e) {
     e.preventDefault(); // prevent page reload
-    const res = await axios.post("http://localhost:5000/todolist", { input });
-    //  send data from this page to backend page then server.
-
     console.log("input task to backend", input);
+  
+    const res = await axios.post("http://localhost:5000/todolist", { input });
+    console.log("response for backend",res);
+    if(res.data.success)
+    {
+      alert("task is added.");
+    }
+    //  send data from this page to backend page then server.
   }
+  async function viewTaks(){
+     const res = await axios.get("http://localhost:5000/viewtasks", {params:{email:state.email, date:input.date}});
+console.log("response for backend",resTask.data);
+setResTask(res.data);
+  }
+    
 
   return (
     <>
       <Navbar />
-      <button onClick={() => setIsOpen(true)}> open model </button>
       {isOpen && (
         <>
           <div id="todolist_ide">
             <div id="todolist_idd">
-              <p> I want to introuduce calender here </p>
-              <button onClick={() => setIsOpen(false)}> Accept it </button>
+            <Calendar onChange={(e)=> dateHandler(e)} value={date} />
             </div>
           </div>
         </>
       )}
-      <h1 id="todolist_idc"> To Do List of {state.name} </h1>
 
-      <div id="todolist_ida">
-        {" "}
-        <div> here todo list will be presented. </div>
-        <div id="todolist_idb">
-          <form onSubmit={(e) => submitHandler(e)}>
+<div id="todolist_ida"> 
+
+<h1 id="todolist_idb"> To Do List of {state.name} </h1>
+<label htmlFor="todolist_idg">  Choose date first:
+  <button id="todolist_idg"   onClick={() => setIsOpen(true)}> <SlCalender size={40} color="blue" /> 
+ {input.date} </button>
+ </label>
+      </div>
+<div id="todolist_idc"> 
+
+     <div> <h1> this date all tasks</h1>
+
+    <table>
+<thead>
+<tr>
+  <th> Task No. </th>
+  <th> Task </th>
+  <th> type </th>
+  <th> value </th>
+</tr>
+</thead>
+<tbody>
+
+  { resTask.map((task,index)=>(  
+  <tr>
+    <td> {index+1} </td>
+    <td> {task.title}  </td>
+    <td> {task.type} </td>
+    <td> {task.value} </td>
+    </tr>
+  ))
+  }
+   
+</tbody>
+    </table>      
+    <button onClick={()=>viewTaks()}> veiw tasks of {input.date} </button>
+       </div>
+
+          <div> 
+          <form  onSubmit={(e) => submitHandler(e)}>
+          <div id="todolist_idd" >
             <label htmlFor="inputa"> Task title :</label>
             <input
               id="inputa"
@@ -101,10 +158,15 @@ export default function ToDoList() {
               <option value="Normal"> Normal </option>
               <option value="Hobby"> Hobby </option>
             </select>
+
             <button type="submit"> submit </button>
+            </div>
           </form>
-        </div>
-      </div>
+
+          </div>
+         
+          </div>
+    
     </>
   );
 }

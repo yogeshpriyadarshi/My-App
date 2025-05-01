@@ -24,7 +24,6 @@ export default function Login() {
       setEmail("");
       setPassword("");
       dispatch({type:"LOGIN", user:res.data.user})
-      console.log("after merging from action.user in state",state);
       navigate("/home");
     } else {
       alert(res.data.message);

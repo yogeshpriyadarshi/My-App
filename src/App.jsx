@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import About from "./About.jsx";
 import Home from "./Home.jsx";
 import Game from "./Game.jsx";
-import Analysis from "./Analysis.jsx";
+import Journal from "./Journal.jsx";
 import Login from "./Login.jsx";
 import CreateAccount from "./CreateAccount.jsx";
 import User from "./User.jsx";
@@ -89,7 +89,7 @@ if(state.isLoading)
       <Route path="/calculator" element={<Calculator />} />
       <Route path="/to_do_list" element={<ToDoList />} />
       <Route path="/game" element={<Game />} />
-      <Route path="/analysis" element={<Analysis />} />
+      <Route path="/journal" element={<Journal />} />
       </>):( <>  
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
