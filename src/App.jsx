@@ -64,7 +64,7 @@ case "LOGIN":
       name:undefined,
       email:undefined,
       password:undefined,
-      contact:undefined,
+      mobile:undefined,
       dob:undefined,
       gender:undefined,
       country:undefined,
