@@ -28,7 +28,6 @@ name:undefined,
 email:undefined,
 password:undefined,
 mobile:undefined,
-date:undefined,
 dob:undefined,
 gender:undefined,
 country:undefined,
@@ -42,20 +41,27 @@ isLoading:true
  function reducer(state,action){
 switch(action.type){
 case "LOGIN":
+  console.log("login case print action.user",action.user);
+  console.log("login case print state",state);
+
   let localUser = JSON.stringify({...state, isLogin:true , ...action.user})
+  console.log("print after stringify to user local store",localUser);
   localStorage.setItem("user",localUser);
   return{...state, isLogin:true ,isLoading:false, ...action.user};
-  case "UPDATEDATE":
-    let updatedDate = JSON.stringify({...state, isLogin:true, ...action.date})
-    localStorage.setItem("user",updatedDate);
-    return{...state, isLogin:true, ...action.user};
+  // case "UPDATEDATE":
+  //   console.log("value of date in updatedate case action.date",action.date);
+  //   let updatedDate = JSON.stringify({...state, isLogin:true, ...action.date})
+  //   localStorage.setItem("user",updatedDate);
+  //   return{...state, isLogin:true, ...action.user};
   case "UPDATEPROFILE":
     let updatedUser = JSON.stringify({...state, isLogin:true , ...action.user})
     localStorage.setItem("user",updatedUser);
     return{...state, isLogin:true , isLoading:false, ...action.user};
   case "LOGOUT":
     localStorage.clear();
-    return {...state,isLogin:false, isLoading:false, name:undefined,
+    console.log("print state form logout case:",state);
+    return {...state,isLogin:false, isLoading:false, 
+      name:undefined,
       email:undefined,
       password:undefined,
       contact:undefined,
@@ -73,6 +79,7 @@ case "LOGIN":
     let user = localStorage.getItem("user");
     if (user) {
       let localUser = JSON.parse(user);
+
       dispatch({ type: "LOGIN",   user: localUser } );
     } else {
       navigate("/");

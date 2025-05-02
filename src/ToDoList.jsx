@@ -16,13 +16,11 @@ import MyCalendar from "./MyCalendar";
 
 export default function ToDoList() {
   const { state, dispatch } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false);
   const [resTask, setResTask] = useState([]);
-
-  const date =new Date().toISOString().slice(0,10);
+ console.log("print all state from to do list", state);
   const [input, setInput] = useState({
     email: state.email,
-    date: date,
+    date: "",
     title: "",
     type: "",
     value: "",
@@ -57,7 +55,6 @@ export default function ToDoList() {
     //  send data from this page to backend page then server.
   }
   useEffect( ()=> {
-
 viewTaks();
   },[input.date]);
 

@@ -17,7 +17,6 @@ export default function Profile() {
   }
 
   function logout() {
-    console.log("clear");
     localStorage.clear();
     dispatch({ type: "LOGOUT" });
     navigate("/");

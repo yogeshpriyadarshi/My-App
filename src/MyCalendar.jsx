@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import { AuthContext } from "./App";
@@ -11,14 +11,23 @@ import './MyCalendar.css';
  
 function MyCalendar() {
     const { state, dispatch } = useContext(AuthContext);
-  const [value, setValue] = useState(moment(new Date()).format("DD-MM-YYYY"));
+  const [value, setValue] = useState(moment(new Date()).format("YYYY-MM-DD"));
   const [isOpen, setIsOpen] = useState(false);
 
   function dateHandler(event){
-    setValue( moment(event).format("DD-MM-YYYY") );
-    dispatch( {type: "UPDATEDATE", date:value})
+    setValue( moment(event).format("YYYY-MM-DD") );
+    console.log("date after selction dateHandler", value);
     setIsOpen(false);
       }
+// useEffect(
+// ()=>{
+
+//   console.log("updating to date",value); 
+//   const Date = { date: value}  
+//   console.log("object of date",Date);
+//    dispatch( {type: "UPDATEDATE", date:Date})
+// },[value]);
+
 
   return (
     <>  

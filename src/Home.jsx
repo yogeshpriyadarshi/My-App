@@ -6,8 +6,8 @@ import { AuthContext } from "./App";
 
 
 function Home() {
-  const navigate = useNavigate();
   const { state, dispatch } = useContext(AuthContext);
+  console.log("print state form home page:",state);
 
 
   return (

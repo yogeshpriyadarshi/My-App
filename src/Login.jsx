@@ -23,6 +23,7 @@ export default function Login() {
     if (res.data.success) {
       setEmail("");
       setPassword("");
+      console.log("console form login",res.data.user);
       dispatch({type:"LOGIN", user:res.data.user})
       navigate("/home");
     } else {
