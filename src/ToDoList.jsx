@@ -8,15 +8,14 @@ import axios from "axios";
 import React from "react";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
-import Calendara, { AuthCalendar } from "./Calendar";
 import Navbar from "./Navbar";
 import { AuthContext } from "./App";
 
 import "./ToDoList.css";
+import MyCalendar from "./MyCalendar";
 
 export default function ToDoList() {
   const { state, dispatch } = useContext(AuthContext);
-  const {value, setValue} = useContext(AuthCalendar);
   const [isOpen, setIsOpen] = useState(false);
   const [resTask, setResTask] = useState([]);
 
@@ -29,12 +28,7 @@ export default function ToDoList() {
     value: "",
   });
 
-  function dateHandler(event){
-console.log("show date after selecting ", moment(event).format("DD-MM-YYYY"));
-console.log("to local string date", event)
-setInput({ ...input, date: moment(event).format("YYYY-MM-DD") });
-setIsOpen(false);
-  }
+
 
   function changeHandler(event) {
     setInput({ ...input, title: event.target.value });
@@ -77,24 +71,10 @@ setResTask(res.data);
   return (
     <>
       <Navbar />
-      {isOpen && (
-        <>
-           <div id="todolist_ide">
-            <div id="todolist_idd">
-            <Calendar  />
-            {/* <Calendar onChange={(e)=> dateHandler(e)} value={date} /> */}
-            </div>
-          </div> 
-        </>
-      )}
 
 <div id="todolist_ida"> 
-
 <h1 id="todolist_idb"> To Do List of {state.name} </h1>
-<label htmlFor="todolist_idg">  Choose date first:
-  <button id="todolist_idg"   onClick={() => setIsOpen(true)}> <SlCalender size={40} color="blue" /> 
- {input.date} </button>
- </label>
+<MyCalendar/>
       </div>
 <div id="todolist_idc"> 
 

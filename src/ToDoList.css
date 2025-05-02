@@ -1,7 +1,7 @@
 #todolist_ida{
     display: flex;
     border: 2px,solid,black;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 #todolist_idb{
  color:red;

@@ -66,7 +66,7 @@ export default function Profile() {
       </div>
       <div id="profile_idc">
         
-          <label>Nameee:</label>
+          <label>Name:</label>
           <br />
           <input
             className="profile_classa"

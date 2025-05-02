@@ -28,6 +28,7 @@ name:undefined,
 email:undefined,
 password:undefined,
 mobile:undefined,
+date:undefined,
 dob:undefined,
 gender:undefined,
 country:undefined,
@@ -44,6 +45,10 @@ case "LOGIN":
   let localUser = JSON.stringify({...state, isLogin:true , ...action.user})
   localStorage.setItem("user",localUser);
   return{...state, isLogin:true ,isLoading:false, ...action.user};
+  case "UPDATEDATE":
+    let updatedDate = JSON.stringify({...state, isLogin:true, ...action.date})
+    localStorage.setItem("user",updatedDate);
+    return{...state, isLogin:true, ...action.user};
   case "UPDATEPROFILE":
     let updatedUser = JSON.stringify({...state, isLogin:true , ...action.user})
     localStorage.setItem("user",updatedUser);
