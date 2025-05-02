@@ -48,11 +48,11 @@ case "LOGIN":
   console.log("print after stringify to user local store",localUser);
   localStorage.setItem("user",localUser);
   return{...state, isLogin:true ,isLoading:false, ...action.user};
-  // case "UPDATEDATE":
-  //   console.log("value of date in updatedate case action.date",action.date);
-  //   let updatedDate = JSON.stringify({...state, isLogin:true, ...action.date})
-  //   localStorage.setItem("user",updatedDate);
-  //   return{...state, isLogin:true, ...action.user};
+  case "UPDATEDATE":
+    console.log("value of date in updatedate case action.date",action.date);
+    let updatedDate = JSON.stringify({...state, isLogin:true, ...action.date})
+    localStorage.setItem("user",updatedDate);
+    return{...state, isLogin:true, ...action.date};
   case "UPDATEPROFILE":
     let updatedUser = JSON.stringify({...state, isLogin:true , ...action.user})
     localStorage.setItem("user",updatedUser);
@@ -60,7 +60,7 @@ case "LOGIN":
   case "LOGOUT":
     localStorage.clear();
     console.log("print state form logout case:",state);
-    return {...state,isLogin:false, isLoading:false, 
+    return {isLogin:false, isLoading:false, 
       name:undefined,
       email:undefined,
       password:undefined,
