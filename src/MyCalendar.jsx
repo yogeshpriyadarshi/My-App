@@ -22,9 +22,7 @@ function MyCalendar() {
 useEffect(
 ()=>{
 
-  console.log("updating to date",value); 
   const Date = { date: value}  
-  console.log("object of date",Date);
    dispatch( {type: "UPDATEDATE", date:Date})
 },[value]);
 

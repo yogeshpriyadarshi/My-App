@@ -1,77 +1,95 @@
-import React, { useState, useContext } from 'react'
-import Navbar from './Navbar'
-import './Journal.css';
+import React, { useState, useContext } from "react";
+import Navbar from "./Navbar";
+import "./Journal.css";
 import { SlCalender } from "react-icons/sl";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import { AuthContext } from "./App";
+import MyCalendar from "./MyCalendar";
+import axios from "axios";
 
 export default function Analysis() {
- 
   const { state, dispatch } = useContext(AuthContext);
   const [feedback, setFeedback] = useState("");
-    const [isOpen, setIsOpen] = useState(false);
-    const [date , setDate]= useState(new Date().toISOString().slice(0,10));
-    // const date =new Date().toISOString().slice(0,10);
+  const [resTask, setResTask] = useState([]);
 
-  
-  const handleSubmit = (e) => {
+  async function handleSubmit(e){
     e.preventDefault();
-    console.log("User Feedback:", feedback);
+    const journal= {email:state.email, date:state.date, daythought: feedback}
     // You can send it to a server using fetch/axios here
-  };
+    console.log("feedback forntend",journal);
+   const res = await axios.post("http://localhost:5000/daythought", journal);
 
-  function dateHandler(event){
-    setDate( event.toISOString().slice(0,10) );
-    setIsOpen(false);
-      }
+
+  }
+
+  async function viewTaks() {
+    const res = await axios.get("http://localhost:5000/viewtasks", {
+      params: { email: state.email, date: state.date },
+    });
+    console.log("response for backend", res.data);
+    setResTask(res.data);
+  }
 
   return (
     <>
-    <Navbar/>
-    <div>   
-    <div id="journal_ida"> <h3>This journal belogn to {state.name} </h3>
-    {isOpen && (   
-      <div id="journal_idc"> 
-<div id="journal_idd">    
+      <Navbar />
+      <div>
+        <div id="journal_ida">
+          {" "}
+          <h3>This journal belogn to {state.name} </h3>
+          <MyCalendar />
+        </div>
 
-<Calendar onChange={(e)=> dateHandler(e)} value={date} />
+        <div id="journal_idb">
+          <div>
+            <form onSubmit={(e)=>handleSubmit(e)}>
+              <label> what is special today.... </label>
+              <br />
+              <textarea
+              id="journal_idc"
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                placeholder="write about Today!"
+              />
+              <br />
+              <button type="submit">Submit</button>
+            </form>
+          </div>
 
-</div >
+          <div> 
+            <h2> My to do list </h2>
+            <table>
+            <thead>
+              <tr>
+                <th> Task No. </th>
+                <th> Task </th>
+                <th> type </th>
+                <th> value </th>
+              </tr>
+            </thead>
+            <tbody>
+              {resTask.map((task, index) => (
+                <tr>
+                  <td> {index + 1} </td>
+                  <td> {task.title} </td>
+                  <td> {task.type} </td>
+                  <td> {task.value} </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
+
+
+
+
+
+
+            <button onClick={ ()=>viewTaks( ) }>   View todo lits  </button>
+            </div>
+        </div>
       </div>
-    )}
-           <h3> Show date here</h3>
-           <button onClick={()=>setIsOpen(true)} > date<SlCalender size={40} color="blue" /> {date} </button>
-    </div>
-<div id="journal_idb">
-<div>
-  
-    <form onSubmit={handleSubmit}>
-      <label> what is special today....  </label><br />
-      <textarea
-        value={feedback}
-        onChange={(e) => setFeedback(e.target.value)}
-        rows="25"
-        cols="50"
-        placeholder="write about Today!"
-      />
-      <br />
-      <button type="submit">Submit</button>
-    </form>
-  
-   </div>
-
-
-<div>     to do list </div>
-
-</div>
-
-
-    </div>
-   
     </>
-    
-  )
-
+  );
 }

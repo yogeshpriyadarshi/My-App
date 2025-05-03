@@ -12,8 +12,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function ClickHandler() {
-
+  async function ClickHandler(e) {
+    e.preventDefault();
     const res = await axios.post("http://localhost:5000/login", {
       email,
       password,
@@ -23,7 +23,6 @@ export default function Login() {
     if (res.data.success) {
       setEmail("");
       setPassword("");
-      console.log("console form login",res.data.user);
       dispatch({type:"LOGIN", user:res.data.user})
       navigate("/home");
     } else {
@@ -42,6 +41,7 @@ export default function Login() {
             <button className="id_button">create account</button>
           </Link>
         </div>
+        <form onSubmit={(e) => ClickHandler(e)}>
         <div id="login_a">
           <h1>Login</h1> <br />
           <p className="Login_class"> Email </p>
@@ -62,11 +62,13 @@ export default function Login() {
           />{" "}
           <br /> <br />
           <br />
-          <button id="login_b" type="submit" onClick={() => ClickHandler()}>
+          <button id="login_b" type="submit" >
             {" "}
             Log in{" "}
           </button>
+        
         </div>
+        </form>
       </div>
     </>
   );

@@ -11,6 +11,7 @@
 justify-content: space-between;
     color:red;
     background-color: aqua;
+    height:100vh;
 }
 #todolist_idd{
     display: flex;
@@ -43,13 +44,19 @@ size: 100px;
     color:red;
    }
    #todolist_idh{
-    
+    display: flex;
+    flex-direction: column;
     color:red;
    }
 
+
 .todolist_classa{
+    height: 25px;
+    width: 300px;
+    margin: 5px;
+    border-radius: 5px;
     border: 2px,dotted,blueviolet;
-font-size: 30px;
+    font-size: 20px;
     background-color:aqua;
 }
 table{

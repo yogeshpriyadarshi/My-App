@@ -17,7 +17,8 @@ import MyCalendar from "./MyCalendar";
 export default function ToDoList() {
   const { state, dispatch } = useContext(AuthContext);
   const [resTask, setResTask] = useState([]);
- console.log("print all state from to do list", state);
+  const [run, setRun]=useState(0);
+  // const [date, setDate] =useState();
   const [input, setInput] = useState({
     email: state.email,
     date: "",
@@ -26,128 +27,135 @@ export default function ToDoList() {
     value: "",
   });
 
-
-
   function changeHandler(event) {
     setInput({ ...input, title: event.target.value });
-
-    console.log("task input", input);
   }
 
   function typeHandler(e) {
     setInput({ ...input, type: e.target.value });
-    console.log("task input", input);
   }
   function valueHandler(e) {
     setInput({ ...input, value: e.target.value });
-    console.log("task input", input);
   }
   async function submitHandler(e) {
     e.preventDefault(); // prevent page reload
+    // setInput({...input, date:state.date});
+
+
     console.log("input task to backend", input);
-  
-    const res = await axios.post("http://localhost:5000/todolist", { input });
-    console.log("response for backend",res);
-    if(res.data.success)
-    {
+
+    const res = await axios.post("http://localhost:5000/todolist", { ...input, date:state.date });
+    console.log("response for backend", res);
+    if (res.data.success) {
+      viewTaks();
+      setInput({
+        email: state.email,
+        date: state.date,
+        title: "",
+        type: "",
+        value: "",})
       alert("task is added.");
-    }
+
     //  send data from this page to backend page then server.
   }
-  useEffect( ()=> {
-viewTaks();
-  },[input.date]);
+}
+ 
+useEffect( ()=> {  viewTaks()  }, [state.date]  );
 
-  async function viewTaks(){
-     const res = await axios.get("http://localhost:5000/viewtasks", {params:{email:state.email, date:input.date}});
-console.log("response for backend",resTask.data);
-setResTask(res.data);
+  async function viewTaks() {
+    const res = await axios.get("http://localhost:5000/viewtasks", {
+      params: { email: state.email, date: state.date },
+    });
+    console.log("response for backend", res.data);
+    setResTask(res.data);
   }
-    
 
   return (
     <>
       <Navbar />
 
-<div id="todolist_ida"> 
-<h1 id="todolist_idb"> To Do List of {state.name} </h1>
-<MyCalendar/>
+      <div id="todolist_ida">
+        <h1 id="todolist_idb"> To Do List of {state.name} </h1>
+        <MyCalendar />
       </div>
-<div id="todolist_idc"> 
 
-     <div> <h1> this date all tasks</h1>
+      <div id="todolist_idc">
+        <div>
+          {" "}
+          <h1> All tasks of {state.date} </h1>
+          <table>
+            <thead>
+              <tr>
+                <th> Task No. </th>
+                <th> Task </th>
+                <th> type </th>
+                <th> value </th>
+              </tr>
+            </thead>
+            <tbody>
+              {resTask.map((task, index) => (
+                <tr>
+                  <td> {index + 1} </td>
+                  <td> {task.title} </td>
+                  <td> {task.type} </td>
+                  <td> {task.value} </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <button onClick={() => viewTaks()}>
+            {" "}
+            veiw tasks of {state.date}{" "}
+          </button>
+        </div>
 
-    <table>
-<thead>
-<tr>
-  <th> Task No. </th>
-  <th> Task </th>
-  <th> type </th>
-  <th> value </th>
-</tr>
-</thead>
-<tbody>
+        <div>
+          <form onSubmit={(e) => submitHandler(e)}>
+            <div id="todolist_idh">
+              <label htmlFor="inputa"> Task title :</label>
+              <input
+                id="inputa"
+                className="todolist_classa"
+                type="text"
+                value={input.title}
+                onChange={(event) => changeHandler(event)}
+              />
 
-  { resTask.map((task,index)=>(  
-  <tr>
-    <td> {index+1} </td>
-    <td> {task.title}  </td>
-    <td> {task.type} </td>
-    <td> {task.value} </td>
-    </tr>
-  ))
-  }
-   
-</tbody>
-    </table>     
+              <label htmlFor="selecta"> Type: </label>
+              <select
+                className="todolist_classa"
+                id="selecta"
+                value={input.type}
+                onChange={(e) => typeHandler(e)}
+              >
+                <option> choose option </option>
 
-    <button onClick={()=>viewTaks()}> veiw tasks of {input.date} </button>
-       </div>
+                <option value="Regular"> Regular </option>
+                <option value="Minor"> Minor </option>
+                <option value="Major"> Major </option>
+              </select>
 
-          <div> 
-          <form  onSubmit={(e) => submitHandler(e)}>
-          <div id="todolist_idh" >
-            <label htmlFor="inputa"> Task title :</label>
-            <input
-              id="inputa"
-              type="text"
-              value={input.title}
-              onChange={(event) => changeHandler(event)}
-            />
-
-            <label htmlFor="selecta"> Type: </label>
-            <select
-              id="selecta"
-              value={input.type}
-              onChange={(e) => typeHandler(e)}
-            >
-              <option> choose option </option>
-
-              <option value="Regular"> Regular </option>
-              <option value="Minor"> Minor </option>
-              <option value="Major"> Major </option>
-            </select>
-
-            <label htmlFor="selectb"> Value: </label>
-            <select
-              id="selectb"
-              value={input.value}
-              onChange={(e) => valueHandler(e)}
-            >
-              <option> choose option </option>
-              <option value="Important"> Important </option>
-              <option value="Normal"> Normal </option>
-              <option value="Hobby"> Hobby </option>
-            </select>
-
-            <button type="submit"> submit </button>
+              <label htmlFor="selectb"> Value: </label>
+              <select
+                className="todolist_classa"
+                id="selectb"
+                value={input.value}
+                onChange={(e) => valueHandler(e)}
+              >
+                <option> choose option </option>
+                <option value="Important"> Important </option>
+                <option value="Normal"> Normal </option>
+                <option value="Hobby"> Hobby </option>
+              </select>
+             <br/>
+              <button className="todolist_classa" type="submit">
+                {" "}
+                submit{" "}
+              </button>
             </div>
           </form>
-
-          </div>
-         
-          </div>
-    
+        </div>
+      </div>
     </>
   );
 }
