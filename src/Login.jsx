@@ -13,7 +13,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   async function ClickHandler(e) {
-    e.preventDefault();
+e.preventDefault();
     const res = await axios.post("http://localhost:5000/login", {
       email,
       password,

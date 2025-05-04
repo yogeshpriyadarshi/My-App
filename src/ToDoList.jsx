@@ -69,6 +69,13 @@ useEffect( ()=> {  viewTaks()  }, [state.date]  );
     console.log("response for backend", res.data);
     setResTask(res.data);
   }
+async function updateTask(){
+  console.log("final update Task",resTask);
+
+  const res =await axios.post("http://localhost:5000/updatetask", resTask );
+
+}
+
 
   return (
     <>
@@ -90,23 +97,33 @@ useEffect( ()=> {  viewTaks()  }, [state.date]  );
                 <th> Task </th>
                 <th> type </th>
                 <th> value </th>
+                <th> Point </th>
+                <th> Remark </th>
+
               </tr>
             </thead>
             <tbody>
               {resTask.map((task, index) => (
-                <tr>
+                
+                <tr key={index}>
                   <td> {index + 1} </td>
                   <td> {task.title} </td>
                   <td> {task.type} </td>
                   <td> {task.value} </td>
+
+                  <td> <input type="number"  value={ task.point === null ? 0 : task.point}
+                   onChange={ (e)=> setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, point: e.target.value } : t)) } /> </td>
+
+                  <td>  <input type="text" value={ task.remark === null ? " " : task.remark}
+                   onChange={ (e)=> setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, remark: e.target.value } : t)) } /> </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <button onClick={() => viewTaks()}>
-            {" "}
-            veiw tasks of {state.date}{" "}
-          </button>
+
+         <button onClick={()=>updateTask()} >  Submit </button> 
+
+
         </div>
 
         <div>

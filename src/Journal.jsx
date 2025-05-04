@@ -12,6 +12,7 @@ export default function Analysis() {
   const { state, dispatch } = useContext(AuthContext);
   const [feedback, setFeedback] = useState("");
   const [resTask, setResTask] = useState([]);
+  const [total, setTotal] = useState(0);
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -30,7 +31,7 @@ export default function Analysis() {
     console.log("response for backend", res.data);
     setResTask(res.data);
   }
-
+ 
   return (
     <>
       <Navbar />
@@ -66,15 +67,19 @@ export default function Analysis() {
                 <th> Task </th>
                 <th> type </th>
                 <th> value </th>
+                <th>  point  </th>
+                <th> Remark </th>
               </tr>
             </thead>
             <tbody>
-              {resTask.map((task, index) => (
+              {resTask.map((task, index) => ( 
                 <tr>
                   <td> {index + 1} </td>
                   <td> {task.title} </td>
                   <td> {task.type} </td>
                   <td> {task.value} </td>
+                  <td>{task.point}</td>
+                  <td> {task.remark} </td>
                 </tr>
               ))}
             </tbody>
