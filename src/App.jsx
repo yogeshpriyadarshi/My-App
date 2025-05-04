@@ -13,6 +13,7 @@ import { Routes, Route, useNavigate, useLocation,  } from "react-router-dom";
 import { useEffect,createContext, useContext} from "react";
 import ToDoList from "./ToDoList.jsx";
 import Profile from "./Profile.jsx";
+import Target from "./Target.jsx";
 
 const AuthContext =createContext();
 export{AuthContext}
@@ -89,7 +90,7 @@ if(state.isLoading)
     <Routes>
       {state?.isLogin?(<>
       <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/target" element={<Target />} />
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/calculator" element={<Calculator />} />

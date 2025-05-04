@@ -16,6 +16,11 @@ export default function Navbar() {
         <Link className="tab" to="/home">
           Home
         </Link>
+
+        <Link className="tab" to="/target">
+          Target
+        </Link>
+
         <Link className="tab" to="/to_do_list">
           To Do List
         </Link>

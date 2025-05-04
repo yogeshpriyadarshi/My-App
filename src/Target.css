@@ -1,0 +1,14 @@
+#target_ida{
+display: flex;
+justify-content: space-between;
+background-color: beige;
+
+
+}
+.target_classa{
+    height: 100vh;
+    width: 300px;
+    border: 2px,solid,black;
+    display: flex;
+    flex-direction: column;
+}

@@ -18,6 +18,7 @@ export default function ToDoList() {
   const { state, dispatch } = useContext(AuthContext);
   const [resTask, setResTask] = useState([]);
   const [run, setRun]=useState(0);
+  const [total, setTotal] = useState(0);
   // const [date, setDate] =useState();
   const [input, setInput] = useState({
     email: state.email,
@@ -37,6 +38,17 @@ export default function ToDoList() {
   function valueHandler(e) {
     setInput({ ...input, value: e.target.value });
   }
+  function addTotal(){
+    setResTask (preTask => preTask.map( (t,i) => t.point===null ? { ...t, point: 0 } : t )) 
+
+  }
+  function pointHandler(e,index){
+ 
+    setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, point: e.target.value } : t)) 
+  addTotal();
+  
+  }
+
   async function submitHandler(e) {
     e.preventDefault(); // prevent page reload
     // setInput({...input, date:state.date});
@@ -66,16 +78,19 @@ useEffect( ()=> {  viewTaks()  }, [state.date]  );
     const res = await axios.get("http://localhost:5000/viewtasks", {
       params: { email: state.email, date: state.date },
     });
-    console.log("response for backend", res.data);
+    console.log("response for backend view Tasks", res.data);
     setResTask(res.data);
   }
+
+
+
 async function updateTask(){
+
   console.log("final update Task",resTask);
 
   const res =await axios.post("http://localhost:5000/updatetask", resTask );
 
 }
-
 
   return (
     <>
@@ -112,7 +127,7 @@ async function updateTask(){
                   <td> {task.value} </td>
 
                   <td> <input type="number"  value={ task.point === null ? 0 : task.point}
-                   onChange={ (e)=> setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, point: e.target.value } : t)) } /> </td>
+                   onChange={ (e)=> pointHandler(e,index) } /> </td>
 
                   <td>  <input type="text" value={ task.remark === null ? " " : task.remark}
                    onChange={ (e)=> setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, remark: e.target.value } : t)) } /> </td>
