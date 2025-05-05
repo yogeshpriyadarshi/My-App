@@ -52,8 +52,6 @@ export default function ToDoList() {
   async function submitHandler(e) {
     e.preventDefault(); // prevent page reload
     // setInput({...input, date:state.date});
-
-
     console.log("input task to backend", input);
 
     const res = await axios.post("http://localhost:5000/todolist", { ...input, date:state.date });
