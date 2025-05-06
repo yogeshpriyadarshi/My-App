@@ -12,3 +12,9 @@ background-color:transparent;
 #calendar_idb{
    color:red
 }
+#calendar_idc{
+   height: 40px;
+   width: 200px;
+   border-radius: 10px;
+   border: 2px,solid,black;
+}

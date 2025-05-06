@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import "./Target.css";
 import { AuthContext } from "./App";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { parse } from "date-fns";
 import moment from "moment";
 
@@ -30,6 +31,9 @@ export default function Target() {
     date: " ",
     status: " ",
   });
+  const navigate = useNavigate();
+
+
   const [status, setStatus] = useState([]);
   const [aim, setAim] = useState({
     email: state.email,
@@ -44,11 +48,13 @@ export default function Target() {
 
   useEffect(() => {
     seekTarget();
-  }, []);
+  }, [aim]);
 
   function typeHandler(e) {
     setAim({ ...aim, type: e.target.value });
   }
+
+
   async function submitHandler(e) {
     e.preventDefault();
     let payload = aim;
@@ -57,15 +63,24 @@ export default function Target() {
       payload.firstDate = `${aim.year}-01-01`;
       payload.lastDate = `${aim.year}-12-31`;
     }
-    console.log(
-      " first date ",
-      payload.firstDate,
-      "last date",
-      payload.lastDate
-    );
-    console.log("print aim from fronted to backend", payload);
+  
+   console.log("print aim from fronted to backend", payload);
 
     const res = await axios.post("http://localhost:5000/setTarget", aim);
+console.log("from backend uploaded target", res)
+
+setAim( {
+  email: state.email,
+  type: " ",
+  customName: " ",
+  year: new Date().getFullYear(),
+  month: monthNames[new Date().getMonth()],
+  firstDate: 0,
+  lastDate: 0,
+  setTarget: " ",
+}  );
+
+
   }
 
   async function statusHandle(e) {
@@ -130,7 +145,7 @@ export default function Target() {
 
             {aim.type === "Custom" && (
               <div>
-                <label style={{ fontSize: "20px" }}> Target Name </label>
+                <label htmlFor="label_ida" style={{ fontSize: "20px" }}> Target Name </label>
                 <input
                   className="target_classa"
                   id="label_ida"
@@ -141,10 +156,10 @@ export default function Target() {
                   }}
                 />
                 <br />
-                <label style={{ fontSize: "20px" }}> Starting date:</label>
+                <label htmlFor="label_idb"  style={{ fontSize: "20px" }}> Starting date:</label>
                 <input
                   className="target_classa"
-                  id="label_ida"
+                  id="label_idb"
                   type="date"
                   onChange={(e) =>
                     setAim({
@@ -155,11 +170,11 @@ export default function Target() {
                 />
                 <br />
 
-                <label style={{ fontSize: "20px" }}> Ending date:</label>
+                <label htmlFor="label_idc" style={{ fontSize: "20px" }}> Ending date:</label>
                 <input
                   className="target_classa"
                   style={{ fontSize: "20px" }}
-                  id="label_ida"
+                  id="label_idc"
                   type="date"
                   onChange={(e) => setAim({ ...aim, lastDate: e.target.value })}
                 />
@@ -249,22 +264,20 @@ export default function Target() {
           </form>
         </div>
       </div>
-
+{/* Target submit form is completed. */}
       <hr />
-
-      <div>
-        show custom target and allow to update status <br />
-        <div style={{display:"flex"}}>
+<div style={{backgroundColor:"blue"}}  >   
+<h1>Custom Target</h1>
+        <div id="target_idd" >
           {target.map((tar, index) => (
             <>
-              <div className="target_classb">
-                <h3>{tar.customName}</h3>
+              <div key={index} className="target_classb" onClick={()=> { navigate(`/target/${tar.id}` , tar)}} >
+                <h3  >{tar.customName}</h3>
+                <p > {tar.target}  </p>
               </div>
             </>
           ))}
         </div>
-
-
         </div>
     </>
   ); 

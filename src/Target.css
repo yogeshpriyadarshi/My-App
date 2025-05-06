@@ -31,6 +31,14 @@ box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 
 }
 
+#target_idd{
+    display:flex;   
+    flex-wrap: wrap;
+    gap:10px; 
+background-color:rgb(50, 50, 200);
+}
+
+
 .target_classa{
     margin:10px;
     height: 25px;
@@ -41,9 +49,10 @@ box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 
 .target_classb{
     padding: 5px;
+    height:150px;
+    width: 380px;
     margin:20px;
- 
-    font-size: 20px;
+    font-size: 15px;
     border-radius: 5px;
     background-color: aqua;
 }
@@ -54,5 +63,5 @@ box-shadow: 0 4px 8px rgba(0,0,0,0.5);
    
     font-size: 20px;
     border-radius: 5px;
-    background-color:blue;
+    background-color:orange;
 }

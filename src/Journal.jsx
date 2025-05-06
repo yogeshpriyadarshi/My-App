@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "./Navbar";
 import "./Journal.css";
 import { SlCalender } from "react-icons/sl";
@@ -12,7 +12,11 @@ export default function Analysis() {
   const { state, dispatch } = useContext(AuthContext);
   const [feedback, setFeedback] = useState("");
   const [resTask, setResTask] = useState([]);
-  const [total, setTotal] = useState(0);
+let total=0;
+  useEffect( ()=>{ viewTaks() },[state.date] );
+
+  resTask.map( (task, index)=>total= total + task.point  );
+  // setTotal(total);
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -20,8 +24,6 @@ export default function Analysis() {
     // You can send it to a server using fetch/axios here
     console.log("feedback forntend",journal);
    const res = await axios.post("http://localhost:5000/daythought", journal);
-
-
   }
 
   async function viewTaks() {
@@ -85,13 +87,7 @@ export default function Analysis() {
             </tbody>
           </table>
 
-
-
-
-
-
-
-            <button onClick={ ()=>viewTaks( ) }>   View todo lits  </button>
+            <button >  Total point: {total}  </button>
             </div>
         </div>
       </div>

@@ -1,14 +1,23 @@
 #profile_ida{
     color: white;
     text-align: center;
+    text-decoration: none;
 }
+
+#profile_ida:hover{
+    color: orange;
+    text-align: center;
+    text-decoration: none;
+}
+
+
 #profile_idb{
     display: flex;
     justify-content: space-around;
-    font-size: 75px;;
-    height: 75px;
+    font-size: 50px;;
+    height: 65px;
     color: white;
-    background-color:black;
+    background-color:rgb(50, 50, 200);
     text-align: center;
 
 }
@@ -16,17 +25,44 @@
     text-align: center;
 }
 #profile_idd{
-    font-size: 40px;
+    font-size: 37px;
     height: 50px;
+    width: 300px;
     background-color:white;
     color: black;
     margin: 10px;
+    border-radius: 10px;
 }
+
+#profile_idd:hover{
+    font-size: 40px;
+    height: 50px;
+    width: 300px;
+    background-color:orange;
+    color: black;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+
 #profile_ide{
-    font-size: 50px;
+    font-size: 38px;
+    height: 47px;
     width: 200px;
     background-color:white;
+    border-radius: 10px;
+    transition-delay: 0.2s;
 }
+
+#profile_ide:hover{
+    font-size: 40px;
+    height: 50px;
+    width: 200px;
+    background-color:orange;
+    border-radius: 10px;
+}
+
+
 .profile_classa{
     margin: 5px;
     height: 30px;

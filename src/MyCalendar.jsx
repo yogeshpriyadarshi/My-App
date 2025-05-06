@@ -27,9 +27,9 @@ function MyCalendar() {
   return (
     <>
       <div>
-        <button onClick={() => setIsOpen(true)}>
+        <button id="calendar_idc" onClick={() => setIsOpen(true)}>
           {" "}
-          <FaRegCalendarCheck size={40} color="blue" />
+          <FaRegCalendarCheck size={30} color="blue" />
           {value}{" "}
         </button>
 

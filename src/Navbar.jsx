@@ -34,7 +34,7 @@ export default function Navbar() {
           Calculator
         </Link>
         <Link className="tab" to="/profile">
-        <FaUserCheck size={40} color="blue" />
+        <FaUserCheck size={40} color="white" />
         </Link>
        
 

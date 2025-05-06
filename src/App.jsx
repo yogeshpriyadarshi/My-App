@@ -14,6 +14,7 @@ import { useEffect,createContext, useContext} from "react";
 import ToDoList from "./ToDoList.jsx";
 import Profile from "./Profile.jsx";
 import Target from "./Target.jsx";
+import Target_id from "./Target_id.jsx";
 
 const AuthContext =createContext();
 export{AuthContext}
@@ -97,6 +98,8 @@ if(state.isLoading)
       <Route path="/to_do_list" element={<ToDoList />} />
       <Route path="/game" element={<Game />} />
       <Route path="/journal" element={<Journal />} />
+      <Route path="/target/:id" element={<Target_id />} />
+
       </>):( <>  
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />

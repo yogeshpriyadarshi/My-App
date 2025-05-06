@@ -38,14 +38,10 @@ export default function ToDoList() {
   function valueHandler(e) {
     setInput({ ...input, value: e.target.value });
   }
-  function addTotal(){
-    setResTask (preTask => preTask.map( (t,i) => t.point===null ? { ...t, point: 0 } : t )) 
-
-  }
+ 
   function pointHandler(e,index){
  
     setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, point: e.target.value } : t)) 
-  addTotal();
   
   }
 
