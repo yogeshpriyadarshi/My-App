@@ -1,14 +1,58 @@
-#target_ida{
-display: flex;
-justify-content: space-between;
-background-color: beige;
-
+button{
+    margin:10px;
+    height:25px;
+     width:200px;
+      font-size:20px
 
 }
+
+
+
+#target_ida{
+    display:flex;    
+background-color:rgb(50, 50, 200);
+}
+
+#target_idb{
+    flex: 1;
+    padding: 10px;
+margin: 10px;
+background-color: beige;
+font-size: 20px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+#target_idc{
+    flex: 1;
+    padding: 10px;
+margin: 10px;
+background-color: beige;
+box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+
+}
+
 .target_classa{
-    height: 100vh;
-    width: 300px;
-    border: 2px,solid,black;
-    display: flex;
-    flex-direction: column;
+    margin:10px;
+    height: 25px;
+    width: 300px; 
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.target_classb{
+    padding: 5px;
+    margin:20px;
+ 
+    font-size: 20px;
+    border-radius: 5px;
+    background-color: aqua;
+}
+
+.target_classb:hover{
+    padding: 10px;
+    margin:20px;
+   
+    font-size: 20px;
+    border-radius: 5px;
+    background-color:blue;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Navbar from "./Navbar";
 import "./Target.css";
 import { AuthContext } from "./App";
@@ -22,7 +22,7 @@ export default function Target() {
     "November",
     "December",
   ];
-  const [type, setType] = useState([]);
+  const [target, setTarget] = useState([]);
   const [currentTarget, setCurrentTarget] = useState(" ");
   const [uploadStatus, setUploadStatus] = useState({
     email: state.email,
@@ -41,6 +41,11 @@ export default function Target() {
     lastDate: 0,
     setTarget: " ",
   });
+
+  useEffect(() => {
+    seekTarget();
+  }, []);
+
   function typeHandler(e) {
     setAim({ ...aim, type: e.target.value });
   }
@@ -85,137 +90,104 @@ export default function Target() {
     console.log("show status of target", res);
   }
 
-  async function customTarget(e) {
-    const customa = { email: state.email, type: e.target.value };
-    console.log(
-      "input custom",
-      state.email,
-      e.target.value,
-      "why not custom",
-      customa
-    );
-    const resType = await axios.post(
-      "http://localhost:5000/customTarget",
-      customa
-    );
-    console.log("backend date of custom", resType);
-    setType(resType.data);
+  async function seekTarget() {
+    const customa = { email: state.email };
+
+    const res = await axios.post("http://localhost:5000/seekTarget", customa);
+    setTarget(res.data);
+    console.log("all Target", res.data);
   }
   return (
     <>
       <Navbar />
-      <div>
-        <h3>Add target</h3>
-        <form onSubmit={(e) => submitHandler(e)}>
-          <select
-            value={aim.type}
-            onChange={(e) => {
-              typeHandler(e);
-            }}
-          >
-            <option value=""> select name of target</option>
-            <option value="Custom"> Custom </option>
-            <option value="Weekly"> Weekly </option>
-            <option value="Monthly"> Monthly </option>
-            <option value="Yearly"> Yearly </option>
-          </select>
+      <div id="target_ida">
+        <div id="target_idb">
+          {" "}
+          <h4> How can one add target?</h4>
+          <p> Step 1: </p>
+        </div>
 
-          {aim.type === "Custom" && (
-            <div>
-              <label>
-                {" "}
-                Target Name(Give different name from previous one){" "}
-              </label>
-              <input
-                type="text"
-                value={aim.customName}
-                onChange={(e) => {
-                  setAim({ ...aim, customName: e.target.value });
-                }}
-              />
-              <br />
-              <label> Starting date:</label>
-              <input
-                type="date"
-                onChange={(e) =>
-                  setAim({
-                    ...aim,
-                    firstDate: moment(e.target.value).format("YYYY-MM-DD"),
-                  })
-                }
-              />
-              <br />
+        <div id="target_idc">
+          <h2 style={{ color: "red" }}>Add target</h2>
 
-              <label> Ending date:</label>
-              <input
-                type="date"
-                onChange={(e) => setAim({ ...aim, lastDate: e.target.value })}
-              />
-              <br />
+          <form onSubmit={(e) => submitHandler(e)}>
+            <label style={{ margin: "10px", fontSize: "20px" }}>
+              Select Type of Target:
+            </label>
+            <select
+              className="target_classa"
+              value={aim.type}
+              onChange={(e) => {
+                typeHandler(e);
+              }}
+            >
+              <option value=""> select type of target</option>
+              <option value="Custom"> Custom </option>
+              <option value="Weekly"> Weekly </option>
+              <option value="Monthly"> Monthly </option>
+              <option value="Yearly"> Yearly </option>
+            </select>
 
-              <label> Describe Target </label>
-              <input
-                type="text"
-                onChange={(e) => setAim({ ...aim, setTarget: e.target.value })}
-              />
-              <br />
-            </div>
-          )}
-
-          {aim.type === "Yearly" && (
-            <>
-              <label> select </label>
-              <select
-                value={aim.year}
-                onChange={(e) => setAim({ ...aim, year: e.target.value })}
-              >
-                <option value=" "> .....choose.....</option>
-                <option value="2025"> 2025 </option>
-                <option value="2026"> 2026 </option>
-                <option value="2027"> 2027 </option>
-                <option value="2028"> 2028 </option>
-                <option value="2029"> 2029 </option>
-                <option value="2030"> 2030 </option>
-              </select>
-              <label> Write Target: </label>
-              <input
-                type="text"
-                onChange={(e) => {
-                  setAim({ ...aim, setTarget: e.target.value });
-                }}
-              />
-            </>
-          )}
-
-          {aim.type === "Monthly" && (
-            <>
+            {aim.type === "Custom" && (
               <div>
-                <label> select months </label>
-                <select
-                  value={aim.month}
-                  onChange={(e) => setAim({ ...aim, month: e.target.value })}
+                <label style={{ fontSize: "20px" }}> Target Name </label>
+                <input
+                  className="target_classa"
+                  id="label_ida"
+                  type="text"
+                  value={aim.customName}
+                  onChange={(e) => {
+                    setAim({ ...aim, customName: e.target.value });
+                  }}
+                />
+                <br />
+                <label style={{ fontSize: "20px" }}> Starting date:</label>
+                <input
+                  className="target_classa"
+                  id="label_ida"
+                  type="date"
+                  onChange={(e) =>
+                    setAim({
+                      ...aim,
+                      firstDate: moment(e.target.value).format("YYYY-MM-DD"),
+                    })
+                  }
+                />
+                <br />
+
+                <label style={{ fontSize: "20px" }}> Ending date:</label>
+                <input
+                  className="target_classa"
+                  style={{ fontSize: "20px" }}
+                  id="label_ida"
+                  type="date"
+                  onChange={(e) => setAim({ ...aim, lastDate: e.target.value })}
+                />
+                <br />
+
+                <label style={{ fontSize: "20px" }}> Describe Target </label>
+                <textarea
+                  style={{ fontSize: "20px" }}
+                  value={aim.setTarget}
+                  onChange={(e) =>
+                    setAim({ ...aim, setTarget: e.target.value })
+                  }
                 >
-                  <option value="January"> January </option>
-                  <option value="Febuary"> Feburary </option>
-                  <option value="March"> March </option>
-                  <option value="April"> April </option>
-                  <option value="May"> May </option>
-                  <option value="June"> June </option>
-                  <option value="July"> July </option>
-                  <option value="August"> August </option>
-                  <option value="September"> September </option>
-                  <option value="October"> October </option>
-                  <option value="November"> November </option>
-                  <option value="December"> December </option>
-                </select>
-              </div>
+                  {" "}
+                </textarea>
 
-              <div>
+                <br />
+              </div>
+            )}
+
+            {aim.type === "Yearly" && (
+              <>
                 <label> select </label>
                 <select
                   value={aim.year}
                   onChange={(e) => setAim({ ...aim, year: e.target.value })}
                 >
+                  <option value=" "> .....choose.....</option>
                   <option value="2025"> 2025 </option>
                   <option value="2026"> 2026 </option>
                   <option value="2027"> 2027 </option>
@@ -223,40 +195,85 @@ export default function Target() {
                   <option value="2029"> 2029 </option>
                   <option value="2030"> 2030 </option>
                 </select>
-              </div>
-            </>
-          )}
-          <button type="submit"> Submit </button>
-        </form>
+                <label> Write Target: </label>
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setAim({ ...aim, setTarget: e.target.value });
+                  }}
+                />
+              </>
+            )}
+
+            {aim.type === "Monthly" && (
+              <>
+                <div>
+                  <label> select months </label>
+                  <select
+                    value={aim.month}
+                    onChange={(e) => setAim({ ...aim, month: e.target.value })}
+                  >
+                    <option value="January"> January </option>
+                    <option value="Febuary"> Feburary </option>
+                    <option value="March"> March </option>
+                    <option value="April"> April </option>
+                    <option value="May"> May </option>
+                    <option value="June"> June </option>
+                    <option value="July"> July </option>
+                    <option value="August"> August </option>
+                    <option value="September"> September </option>
+                    <option value="October"> October </option>
+                    <option value="November"> November </option>
+                    <option value="December"> December </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label> select </label>
+                  <select
+                    value={aim.year}
+                    onChange={(e) => setAim({ ...aim, year: e.target.value })}
+                  >
+                    <option value="2025"> 2025 </option>
+                    <option value="2026"> 2026 </option>
+                    <option value="2027"> 2027 </option>
+                    <option value="2028"> 2028 </option>
+                    <option value="2029"> 2029 </option>
+                    <option value="2030"> 2030 </option>
+                  </select>
+                </div>
+              </>
+            )}
+            <br />
+            <button type="submit"> Submit </button>
+          </form>
+        </div>
       </div>
+
       <hr />
+
       <div>
         show custom target and allow to update status <br />
-        <label> selcet custom target </label> <br />
-        <select
-          onChange={(e) => {
-            customTarget(e);
-          }}
-        >
-          <option> ...choose....</option>
-          <option value="Custom"> custom </option>
-          <option value="Monthly"> Monthly </option>
-          <option value="Yearly"> yearly </option>
-        </select>
-        <select
-          onChange={(e) => {
-            statusHandle(e);
-          }}
-        >
-          <option> ...choose....</option>
-          {type.map((ty, i) => (
-            <option key={i} value={ty.customName}>
-              {" "}
-              {ty.customName}{" "}
-            </option>
+        <div style={{display:"flex"}}>
+          {target.map((tar, index) => (
+            <>
+              <div className="target_classb">
+                <h3>{tar.customName}</h3>
+              </div>
+            </>
           ))}
-        </select>
-        <div style={{ backgroundColor: "yellow" }}>
+        </div>
+
+
+        </div>
+    </>
+  ); 
+
+}
+
+{/* next page concept */}
+
+        {/* <div style={{ backgroundColor: "yellow" }}>
           <h3> SHOW HERE TARGET AND IT'S PROGRESS STATUS</h3>
         </div>
         <h4> target name{currentTarget}</h4>
@@ -295,11 +312,11 @@ export default function Target() {
               setUploadStatus({ ...uploadStatus, status: e.target.value });
             }}
           />
-          <br />
+          <br /> */}
 
-          <button type="submit"> update status </button>
-        </form>
-      </div>
-    </>
-  );
-}
+          {/* {/* <button type="submit" style={{ height: "25px", width: "300px" }}>
+            {" "}
+            update status{" "}
+          </button>
+        </form> */}
+
