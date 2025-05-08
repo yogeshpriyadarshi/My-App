@@ -1,11 +1,14 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
+
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserCheck } from "react-icons/fa";
 
 import "./Navbar.css";
 
 export default function Navbar() {
- 
+  const location = useLocation();
+console.log("first,,", location.pathname);
   return (
     <header>
       <div id="navbar">
@@ -13,7 +16,7 @@ export default function Navbar() {
           {" "}
           <img src="src\assets\react.svg" alt="logo" />{" "}
         </Link>
-        <Link className="tab" to="/home">
+        <Link className={location.pathname.includes("home") ?"tab_selected": "tab"}  to="/home">
           Home
         </Link>
 

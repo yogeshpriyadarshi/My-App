@@ -18,8 +18,6 @@ export default function ToDoList() {
   const { state, dispatch } = useContext(AuthContext);
   const [resTask, setResTask] = useState([]);
   const [run, setRun]=useState(0);
-  const [total, setTotal] = useState(0);
-  // const [date, setDate] =useState();
   const [input, setInput] = useState({
     email: state.email,
     date: "",
@@ -28,6 +26,25 @@ export default function ToDoList() {
     value: "",
   });
 
+
+  const givenDate = new Date(state.date);
+  const today = new Date();
+  
+  // Reset time to midnight to compare only dates
+  givenDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+  
+  // Calculate difference in milliseconds
+  const diffInMs = today - givenDate;
+  
+  // Convert milliseconds to days
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  
+  console.log(`Difference in days: ${diffInDays}`);
+  
+
+
+console.log("state",state)
   function changeHandler(event) {
     setInput({ ...input, title: event.target.value });
   }
@@ -38,18 +55,12 @@ export default function ToDoList() {
   function valueHandler(e) {
     setInput({ ...input, value: e.target.value });
   }
- 
   function pointHandler(e,index){
- 
-    setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, point: e.target.value } : t)) 
-  
+    setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, point: e.target.value } : t))
   }
-
   async function submitHandler(e) {
-    e.preventDefault(); // prevent page reload
-    // setInput({...input, date:state.date});
+    e.preventDefault(); 
     console.log("input task to backend", input);
-
     const res = await axios.post("http://localhost:5000/todolist", { ...input, date:state.date });
     console.log("response for backend", res);
     if (res.data.success) {
@@ -57,33 +68,29 @@ export default function ToDoList() {
       setInput({
         email: state.email,
         date: state.date,
-        title: "",
-        type: "",
-        value: "",})
-      alert("task is added.");
-
+        title: " ",
+        type: " ",
+        value: " ",})
     //  send data from this page to backend page then server.
   }
 }
- 
+ console.log("resTask",resTask)
 useEffect( ()=> {  viewTaks()  }, [state.date]  );
 
   async function viewTaks() {
     const res = await axios.get("http://localhost:5000/viewtasks", {
       params: { email: state.email, date: state.date },
     });
-    console.log("response for backend view Tasks", res.data);
-    setResTask(res.data);
+    console.log("response for backend view Tasks done", res.data);
+
+    setResTask([...res.data]);
   }
-
-
+  
 
 async function updateTask(){
-
   console.log("final update Task",resTask);
 
   const res =await axios.post("http://localhost:5000/updatetask", resTask );
-
 }
 
   return (
@@ -108,23 +115,23 @@ async function updateTask(){
                 <th> value </th>
                 <th> Point </th>
                 <th> Remark </th>
-
               </tr>
             </thead>
             <tbody>
               {resTask.map((task, index) => (
                 
-                <tr key={index}>
+                <tr key={index.toString()}>
                   <td> {index + 1} </td>
                   <td> {task.title} </td>
                   <td> {task.type} </td>
                   <td> {task.value} </td>
 
-                  <td> <input type="number"  value={ task.point === null ? 0 : task.point}
+                  <td> <input  id="todolist_idi" type="number"  value={ task?.point?task.point:0}
                    onChange={ (e)=> pointHandler(e,index) } /> </td>
 
-                  <td>  <input type="text" value={ task.remark === null ? " " : task.remark}
-                   onChange={ (e)=> setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, remark: e.target.value } : t)) } /> </td>
+                  <td>  <input id="todolist_idj" type="text" value={ task?.remark?task.remark:" "}
+                   onChange={ (e)=> setResTask (preTask => preTask.map((t,i) => i===index ? { ...t, remark: e.target.value } : t)) } 
+                     disabled={diffInDays>1}   /> </td>
                 </tr>
               ))}
             </tbody>
@@ -134,10 +141,14 @@ async function updateTask(){
 
 
         </div>
+  
+<div style={{border:"0.5px solid black"}}  >   </div>
 
         <div>
           <form onSubmit={(e) => submitHandler(e)}>
             <div id="todolist_idh">
+<h3> Add task of {state.date}</h3>
+<hr/>
               <label htmlFor="inputa"> Task title :</label>
               <input
                 id="inputa"
