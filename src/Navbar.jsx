@@ -8,7 +8,7 @@ import "./Navbar.css";
 
 export default function Navbar() {
   const location = useLocation();
-console.log("first,,", location.pathname);
+// console.log("first,,", location.pathname);
   return (
     <header>
       <div id="navbar">
