@@ -14,29 +14,31 @@ export default function Navbar() {
       <div id="navbar">
         <Link to="/">
           {" "}
-          <img src="src\assets\react.svg" alt="logo" />{" "}
+          <img src="src\assets\logo do it.png" alt="logo" />{" "}
         </Link>
         <Link className={location.pathname.includes("home") ?"tab_selected": "tab"}  to="/home">
           Home
         </Link>
 
-        <Link className="tab" to="/target">
+        <Link className= {location.pathname.includes("target") ?"tab_selected": "tab"}  to="/target">
           Target
         </Link>
 
-        <Link className="tab" to="/to_do_list">
+        <Link className={location.pathname.includes("to_do_list") ?"tab_selected": "tab"}  to="/to_do_list">
           To Do List
         </Link>
-        <Link className="tab" to="/game">
-          Game
-        </Link>
-        <Link className="tab" to="/journal">
+       
+        <Link className= {location.pathname.includes("journal") ?"tab_selected": "tab"}  to="/journal">
           Journal
         </Link>
-        <Link className="tab" to="/calculator">
+        <Link className= {location.pathname.includes("calculator") ?"tab_selected": "tab"} to="/calculator">
           Calculator
         </Link>
-        <Link className="tab" to="/profile">
+         <Link className={location.pathname.includes("game") ?"tab_selected": "tab"}   to="/game">
+          Game
+        </Link>
+        <Link className= {location.pathname.includes("profile") ?"tab_selected": "tab"} to="/profile"> 
+
         <FaUserCheck size={40} color="white" />
         </Link>
        
