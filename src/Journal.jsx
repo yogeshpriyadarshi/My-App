@@ -9,13 +9,13 @@ import MyCalendar from "./MyCalendar";
 import axios from "axios";
 
 export default function Analysis() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { globalState, dispatch } = useContext(AuthContext);
 
   const [resTask, setResTask] = useState([]);
   const [journal, setJournal] = useState({
     id: 0,
-    email: state.email,
-    date: state.date,
+    email: globalState.email,
+    date: globalState.date,
     daythought: " ",
     point: 0
   });
@@ -23,7 +23,7 @@ export default function Analysis() {
   useEffect(() => {
     viewTaks()
     viewDayThought();
-  }, [state.date]);
+  }, [globalState.date]);
 
 
   let total = 0;
@@ -38,7 +38,7 @@ export default function Analysis() {
 
   async function viewTaks() {
     const res = await axios.get("http://localhost:5000/viewtasks", {
-      params: { email: state.email, date: state.date },
+      params: { email: globalState.email, date: globalState.date },
     });
     console.log("response for backend for viewTask", res.data);
     setResTask(res.data);
@@ -46,7 +46,7 @@ export default function Analysis() {
 
   async function viewDayThought() {
     const res = await axios.get("http://localhost:5000/viewdaythought", {
-      params: { email: state.email, date: state.date },
+      params: { email: globalState.email, date: globalState.date },
     });
 
     console.log("response for backend for  journal", res.data);
@@ -54,8 +54,8 @@ export default function Analysis() {
     {
       setJournal({
         id: 0,
-    email: state.email,
-    date: state.date,
+    email: globalState.email,
+    date: globalState.date,
     daythought: " ",
     point: 0
       }
@@ -71,7 +71,7 @@ export default function Analysis() {
       <div>
         <div id="journal_ida">
           {" "}
-          <h1 style={{color:"white"}}>This journal belogn to {state.name} </h1>
+          <h1 style={{color:"white"}}>This journal belogn to {globalState.name} </h1>
           <MyCalendar />
         </div>
 

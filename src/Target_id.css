@@ -1,0 +1,16 @@
+#targetida{
+    color: white;
+    background-color: rgb(50, 50, 150);
+    display: flex;
+    justify-content: center;
+}
+#targetidb{
+    display: flex;
+    justify-content:space-between;
+}
+#textida{
+    font-size: 20px;
+    margin: 5px;
+    height: 300px;
+    width: 300px;
+}

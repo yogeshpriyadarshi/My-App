@@ -10,7 +10,7 @@ import "./App";
 import "./MyCalendar.css";
 
 function MyCalendar() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { globalState, dispatch } = useContext(AuthContext);
   const [value, setValue] = useState(moment(new Date()).format("YYYY-MM-DD"));
   const [isOpen, setIsOpen] = useState(false);
 

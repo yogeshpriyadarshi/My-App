@@ -8,7 +8,7 @@ import { parse } from "date-fns";
 import moment from "moment";
 
 export default function Target() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { globalState, dispatch } = useContext(AuthContext);
   const monthNames = [
     "January",
     "February",
@@ -26,7 +26,7 @@ export default function Target() {
   const [target, setTarget] = useState([]);
   const [currentTarget, setCurrentTarget] = useState(" ");
   const [uploadStatus, setUploadStatus] = useState({
-    email: state.email,
+    email: globalState.email,
     name: " ",
     date: " ",
     status: " ",
@@ -36,7 +36,7 @@ export default function Target() {
 
   const [status, setStatus] = useState([]);
   const [aim, setAim] = useState({
-    email: state.email,
+    email: globalState.email,
     type: " ",
     customName: " ",
     year: new Date().getFullYear(),
@@ -70,7 +70,7 @@ export default function Target() {
 console.log("from backend uploaded target", res)
 
 setAim( {
-  email: state.email,
+  email: globalState.email,
   type: " ",
   customName: " ",
   year: new Date().getFullYear(),
@@ -89,24 +89,16 @@ setAim( {
     // console.log("after selection of target name",ida);
     setCurrentTarget(e.target.value);
     setUploadStatus({ ...uploadStatus, name: e.target.value });
-    const status = { email: state.email, name: e.target.value };
+    const status = { email: globalState.email, name: e.target.value };
     console.log("status Handle", status);
     const res = await axios.post("http://localhost:5000/statusTarget", status);
     console.log("setStatus", res.data);
     setStatus(res.data);
   }
-  async function uploadStatusHandler(e) {
-    e.preventDefault();
-    console.log("upload data", uploadStatus);
-    const res = await axios.post(
-      "http://localhost:5000/uploadstatus",
-      uploadStatus
-    );
-    console.log("show status of target", res);
-  }
+
 
   async function seekTarget() {
-    const customa = { email: state.email };
+    const customa = { email: globalState.email };
 
     const res = await axios.post("http://localhost:5000/seekTarget", customa);
     setTarget(res.data);
@@ -267,11 +259,11 @@ setAim( {
 {/* Target submit form is completed. */}
       <hr />
 <div style={{backgroundColor:"blue"}}  >   
-<h1>Custom Target</h1>
+            <h1>Custom Target</h1>
         <div id="target_idd" >
           {target.map((tar, index) => (
             <>
-              <div key={index} className="target_classb" onClick={()=> { navigate(`/target/${tar.id}` , tar)}} >
+              <div key={index} className="target_classb" onClick={()=> { navigate(`/target/${tar.id}`, {state:tar}  )}} >
                 <h3  >{tar.customName}</h3>
                 <p > {tar.target}  </p>
               </div>
@@ -280,56 +272,10 @@ setAim( {
         </div>
         </div>
     </>
-  ); 
-
+  );
 }
 
-{/* next page concept */}
 
-        {/* <div style={{ backgroundColor: "yellow" }}>
-          <h3> SHOW HERE TARGET AND IT'S PROGRESS STATUS</h3>
-        </div>
-        <h4> target name{currentTarget}</h4>
-        <table>
-          <thead>
-            <tr>
-              <th> date </th>
-              <th> progress </th>
-            </tr>
-          </thead>
-          <tbody>
-            {status.map((ta, i) => (
-              <>
-                <tr key={i}>
-                  <td> {ta.date} </td>
-                  <td> {ta.status} </td>
-                </tr>
-              </>
-            ))}
-          </tbody>
-        </table>
-        <hr />
-        <form onSubmit={(e) => uploadStatusHandler(e)}>
-          <label> date: </label>
-          <input
-            type="date"
-            onChange={(e) => {
-              setUploadStatus({ ...uploadStatus, date: e.target.value });
-            }}
-          />
-          <br />
-          <label> status: </label>
-          <input
-            type="text"
-            onChange={(e) => {
-              setUploadStatus({ ...uploadStatus, status: e.target.value });
-            }}
-          />
-          <br /> */}
 
-          {/* {/* <button type="submit" style={{ height: "25px", width: "300px" }}>
-            {" "}
-            update status{" "}
-          </button>
-        </form> */}
+
 

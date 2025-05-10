@@ -15,11 +15,11 @@ import "./ToDoList.css";
 import MyCalendar from "./MyCalendar";
 
 export default function ToDoList() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { globalState, dispatch } = useContext(AuthContext);
   const [resTask, setResTask] = useState([]);
   const [run, setRun]=useState(0);
   const [input, setInput] = useState({
-    email: state.email,
+    email: globalState.email,
     date: "",
     title: "",
     type: "",
@@ -27,7 +27,7 @@ export default function ToDoList() {
   });
 
 
-  const givenDate = new Date(state.date);
+  const givenDate = new Date(globalState.date);
   const today = new Date();
   
   // Reset time to midnight to compare only dates
@@ -44,7 +44,6 @@ export default function ToDoList() {
   
 
 
-console.log("state",state)
   function changeHandler(event) {
     setInput({ ...input, title: event.target.value });
   }
@@ -61,13 +60,13 @@ console.log("state",state)
   async function submitHandler(e) {
     e.preventDefault(); 
     console.log("input task to backend", input);
-    const res = await axios.post("http://localhost:5000/todolist", { ...input, date:state.date });
+    const res = await axios.post("http://localhost:5000/todolist", { ...input, date:globalState.date });
     console.log("response for backend", res);
     if (res.data.success) {
       viewTaks();
       setInput({
-        email: state.email,
-        date: state.date,
+        email: globalState.email,
+        date: globalState.date,
         title: " ",
         type: " ",
         value: " ",})
@@ -75,11 +74,11 @@ console.log("state",state)
   }
 }
  console.log("resTask",resTask)
-useEffect( ()=> {  viewTaks()  }, [state.date]  );
+useEffect( ()=> {  viewTaks()  }, [globalState.date]  );
 
   async function viewTaks() {
     const res = await axios.get("http://localhost:5000/viewtasks", {
-      params: { email: state.email, date: state.date },
+      params: { email: globalState.email, date: globalState.date },
     });
     console.log("response for backend view Tasks done", res.data);
 
@@ -98,14 +97,14 @@ async function updateTask(){
       <Navbar />
 
       <div id="todolist_ida">
-        <h1 id="todolist_idb"> To Do List of {state.name} </h1>
+        <h1 id="todolist_idb"> To Do List of {globalState.name} </h1>
         <MyCalendar />
       </div>
 
       <div id="todolist_idc">
         <div>
           {" "}
-          <h1> All tasks of {state.date} </h1>
+          <h1> All tasks of {globalState.date} </h1>
           <table>
             <thead>
               <tr>
@@ -147,7 +146,7 @@ async function updateTask(){
         <div>
           <form onSubmit={(e) => submitHandler(e)}>
             <div id="todolist_idh">
-<h3> Add task of {state.date}</h3>
+<h3> Add task of {globalState.date}</h3>
 <hr/>
               <label htmlFor="inputa"> Task title :</label>
               <input

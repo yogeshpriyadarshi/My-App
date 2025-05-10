@@ -6,7 +6,7 @@ import { AuthContext } from "./App";
 
 
 function Home() {
-  const { state, dispatch } = useContext(AuthContext);
+  const { globalState, dispatch } = useContext(AuthContext);
 
 
   return (
@@ -15,7 +15,7 @@ function Home() {
 
       <div id="home_a">
         {" "}
-        <h1> Welcome to home page: {state.name}  </h1>{" "}
+        <h1> Welcome to home page: {globalState.name}  </h1>{" "}
         
       </div>
     </>

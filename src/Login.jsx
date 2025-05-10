@@ -7,7 +7,7 @@ import { AuthContext } from "./App";
 
 export default function Login() {
   const navigate = useNavigate();
-  const {state, dispatch} = useContext(AuthContext);
+  const {globalState, dispatch} = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

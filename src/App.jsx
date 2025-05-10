@@ -38,22 +38,22 @@ isLogin:false,
 isLoading:true
   }
 
-  const [ state, dispatch]= useReducer(reducer,intialValues);
+  const [ globalState, dispatch]= useReducer(reducer,intialValues);
 
- function reducer(state,action){
+ function reducer(globalState,action){
 switch(action.type){
 case "LOGIN":
-  let localUser = JSON.stringify({...state, isLogin:true , ...action.user})
+  let localUser = JSON.stringify({...globalState, isLogin:true , ...action.user})
   localStorage.setItem("user",localUser);
-  return{...state, isLogin:true ,isLoading:false, ...action.user};
+  return{...globalState, isLogin:true ,isLoading:false, ...action.user};
   case "UPDATEDATE":
-    let updatedDate = JSON.stringify({...state, isLogin:true, ...action.date})
+    let updatedDate = JSON.stringify({...globalState, isLogin:true, ...action.date})
     localStorage.setItem("user",updatedDate);
-    return{...state, isLogin:true, ...action.date};
+    return{...globalState, isLogin:true, ...action.date};
   case "UPDATEPROFILE":
-    let updatedUser = JSON.stringify({...state, isLogin:true , ...action.user})
+    let updatedUser = JSON.stringify({...globalState, isLogin:true , ...action.user})
     localStorage.setItem("user",updatedUser);
-    return{...state, isLogin:true , isLoading:false, ...action.user};
+    return{...globalState, isLogin:true , isLoading:false, ...action.user};
   case "LOGOUT":
     localStorage.clear();
     return {isLogin:false, isLoading:false, 
@@ -66,7 +66,7 @@ case "LOGIN":
       country:undefined,
       city:undefined, };
     default:
-      return {...state};
+      return {...globalState};
 }
 
  }
@@ -81,15 +81,15 @@ case "LOGIN":
       navigate("/");
     }  
   }, []);
-if(state.isLoading)
+if(globalState.isLoading)
 { <>  
  <p> loading.... </p>
 
 </>  }
   return (
-    <AuthContext.Provider value={{state,dispatch}} > 
+    <AuthContext.Provider value={{globalState,dispatch}} > 
     <Routes>
-      {state?.isLogin?(<>
+      {globalState?.isLogin?(<>
       <Route path="/" element={<Home />} />
       <Route path="/target" element={<Target />} />
       <Route path="/home" element={<Home />} />
