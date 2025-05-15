@@ -83,18 +83,7 @@ setAim( {
 
   }
 
-  async function statusHandle(e) {
-    // const ida = e.target.value;
-    // const typea = type.find( type => type.id===ida)
-    // console.log("after selection of target name",ida);
-    setCurrentTarget(e.target.value);
-    setUploadStatus({ ...uploadStatus, name: e.target.value });
-    const status = { email: globalState.email, name: e.target.value };
-    console.log("status Handle", status);
-    const res = await axios.post("http://localhost:5000/statusTarget", status);
-    console.log("setStatus", res.data);
-    setStatus(res.data);
-  }
+ 
 
 
   async function seekTarget() {

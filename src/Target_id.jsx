@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "./App";
 
@@ -11,7 +11,6 @@ export default function Target_id() {
   const { globalState, dispatch } = useContext(AuthContext);
   const location = useLocation();
   const target = location.state;
-
   const [uploadStatus, setUploadStatus] = useState({
     email: globalState.email,
     name: target.customName,
@@ -19,6 +18,9 @@ export default function Target_id() {
     status: " ",
     id:target.id
   });
+  const [status, setStatus]= useState([]);
+
+  useEffect( ()=>{statusHandle()},[]);
 
   async function uploadStatusHandler(e) {
     e.preventDefault();
@@ -30,6 +32,17 @@ export default function Target_id() {
     );
     console.log("show status of target", res);
   }
+
+ async function statusHandle() {
+  
+    const status = { id: target.id };
+    console.log("status Handle", status);
+  
+    const res = await axios.post("http://localhost:5000/statusTarget", status);
+    console.log("setStatus", res.data);
+    setStatus(res.data);
+  }
+
 
   // {
   //     "id": 5,
@@ -49,14 +62,18 @@ export default function Target_id() {
       <div id="targetida">
         <h1> {target.customName} </h1>
       </div>
+
       <div id="targetidb">
-        <div id="targetidc">
-          <div className="targetclassa"> {target.target} </div>
-          <div className="targetclassa" > {target.firstDate} </div>
-          <div className="targetclassa" > {target.lastDate} </div>
+        <div id ="targetidc"> 
+
+        <div id="targetidd">
+          <div className="targetclassa" > Starting date of Target: {(target.firstDate).slice(0,10)} </div>
+          <div className="targetclassa" > Ending date of Target: {(target.lastDate).slice(0,10)} </div>
         </div>
-        <div>
-          upload the status
+
+          <div> {target.target} </div>
+</div>
+        <div id="targetide">
           <div style={{ backgroundColor: "blue", color: "white" }}>
             <h3> Upload your PROGRESS</h3>
           </div>
@@ -65,7 +82,7 @@ export default function Target_id() {
             <input type="date" onChange={(e)=> setUploadStatus({...uploadStatus, date:e.target.value})} />
             <br />
             <label> status: </label>
-            <textarea id="textida" onChange={(e)=> setUploadStatus({...uploadStatus, status:e.target.value})} >  </textarea>
+            <textarea id="textida" value="Ram" onChange={(e)=> setUploadStatus({...uploadStatus, status:e.target.value})} >  </textarea>
 <br/>
             <button type="submit" style={{ height: "25px", width: "300px" }}>
               {" "}
@@ -78,4 +95,3 @@ export default function Target_id() {
   );
 }
 
-function DestinationComponent() {}
