@@ -50,10 +50,10 @@ export default function Target_id() {
         <h1> {target.customName} </h1>
       </div>
       <div id="targetidb">
-        <div>
-          <div> {target.target} </div>
-          <div> {target.firstDate} </div>
-          <div> {target.lastDate} </div>
+        <div id="targetidc">
+          <div className="targetclassa"> {target.target} </div>
+          <div className="targetclassa" > {target.firstDate} </div>
+          <div className="targetclassa" > {target.lastDate} </div>
         </div>
         <div>
           upload the status

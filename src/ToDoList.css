@@ -2,8 +2,7 @@
     display: flex;
     border: 1px,solid,black;
     justify-content: space-between;
-    background-color: rgb(50, 50, 200);
-}
+background-color: rgb(58, 89, 209);}
 #todolist_idb{
  color:white;
 }
@@ -11,8 +10,7 @@
     display: flex;
 justify-content: space-between;
     color:white;
-    background-color: rgb(50, 50, 200);
-}
+background-color: rgb(58, 89, 209);}
 #todolist_idd{
     display: flex;
     flex-direction: column;
