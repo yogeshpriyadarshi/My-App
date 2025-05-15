@@ -186,7 +186,7 @@ async function updateTask(){
              <br/>
               <button className="todolist_classa" type="submit">
                 {" "}
-                submit{" "}
+                Add Task{" "}
               </button>
             </div>
           </form>
