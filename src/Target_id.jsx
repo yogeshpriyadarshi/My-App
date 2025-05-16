@@ -16,33 +16,43 @@ export default function Target_id() {
     name: target.customName,
     date: " ",
     status: " ",
-    id:target.id
+    id: target.id,
   });
-  const [status, setStatus]= useState([]);
+  const [status, setStatus] = useState([]);
+console.log("first,",status[0]?.id);
 
-  useEffect( ()=>{statusHandle()},[]);
+  useEffect(() => {
+    statusHandle();
+  }, []);
 
   async function uploadStatusHandler(e) {
     e.preventDefault();
     console.log("upload data", uploadStatus);
-  
+
     const res = await axios.post(
       "http://localhost:5000/uploadstatus",
       uploadStatus
     );
     console.log("show status of target", res);
+
+    setUploadStatus({
+      email: globalState.email,
+      name: target.customName,
+      date: " ",
+      status: " ",
+      id: target.id,
+    });
   }
 
- async function statusHandle() {
-  
+
+  async function statusHandle() {
     const status = { id: target.id };
     console.log("status Handle", status);
-  
+
     const res = await axios.post("http://localhost:5000/statusTarget", status);
-    console.log("setStatus", res.data);
+    console.log("setStatus upload status", res.data);
     setStatus(res.data);
   }
-
 
   // {
   //     "id": 5,
@@ -64,26 +74,60 @@ export default function Target_id() {
       </div>
 
       <div id="targetidb">
-        <div id ="targetidc"> 
-
-        <div id="targetidd">
-          <div className="targetclassa" > Starting date of Target: {(target.firstDate).slice(0,10)} </div>
-          <div className="targetclassa" > Ending date of Target: {(target.lastDate).slice(0,10)} </div>
-        </div>
+        <div id="targetidc">
+          <div id="targetidd">
+            <div className="targetclassa">
+              {" "}
+              Starting date of Target: {target.firstDate.slice(0, 10)}{" "}
+            </div>
+            <div className="targetclassa">
+              {" "}
+              Ending date of Target: {target.lastDate.slice(0, 10)}{" "}
+            </div>
+          </div>
 
           <div> {target.target} </div>
-</div>
+
+          <table>
+            <thead>
+              <tr>
+                <th> Date </th>
+                <th> Update</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> {status[0]?.date} </td>
+                <td> {status[0]?.status} </td>
+              </tr>
+            </tbody>
+          </table> 
+
+        </div>
         <div id="targetide">
           <div style={{ backgroundColor: "blue", color: "white" }}>
             <h3> Upload your PROGRESS</h3>
           </div>
           <form onSubmit={(e) => uploadStatusHandler(e)}>
             <label> date: </label>
-            <input type="date" onChange={(e)=> setUploadStatus({...uploadStatus, date:e.target.value})} />
+            <input
+              type="date"
+              onChange={(e) =>
+                setUploadStatus({ ...uploadStatus, date: e.target.value })
+              }
+            />
             <br />
             <label> status: </label>
-            <textarea id="textida" value="Ram" onChange={(e)=> setUploadStatus({...uploadStatus, status:e.target.value})} >  </textarea>
-<br/>
+            <textarea
+              id="textida"
+              value={uploadStatus.status}
+              onChange={(e) =>
+                setUploadStatus({ ...uploadStatus, status: e.target.value })
+              }
+            >
+              {" "}
+            </textarea>
+            <br />
             <button type="submit" style={{ height: "25px", width: "300px" }}>
               {" "}
               update status{" "}
@@ -94,4 +138,3 @@ export default function Target_id() {
     </>
   );
 }
-

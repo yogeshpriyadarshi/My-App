@@ -1,11 +1,12 @@
 #targetida{
     color: white;
-    background-color: rgb(50, 50, 150);
+    background-color: rgb(58, 89, 209);
     display: flex;
     justify-content: center;
 }
 #targetidb{
-    margin: 10px;
+        background-color: rgb(58, 89, 209);
+
     display: flex;
     flex:auto;
     justify-content:space-between;

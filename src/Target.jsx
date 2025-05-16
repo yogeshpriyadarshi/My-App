@@ -25,14 +25,8 @@ export default function Target() {
   ];
   const [target, setTarget] = useState([]);
   const [currentTarget, setCurrentTarget] = useState(" ");
-  const [uploadStatus, setUploadStatus] = useState({
-    email: globalState.email,
-    name: " ",
-    date: " ",
-    status: " ",
-  });
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   const [status, setStatus] = useState([]);
   const [aim, setAim] = useState({
@@ -54,7 +48,6 @@ export default function Target() {
     setAim({ ...aim, type: e.target.value });
   }
 
-
   async function submitHandler(e) {
     e.preventDefault();
     let payload = aim;
@@ -63,35 +56,28 @@ export default function Target() {
       payload.firstDate = `${aim.year}-01-01`;
       payload.lastDate = `${aim.year}-12-31`;
     }
-  
-   console.log("print aim from fronted to backend", payload);
+
+    console.log("print aim from fronted to backend", payload);
 
     const res = await axios.post("http://localhost:5000/setTarget", aim);
-console.log("from backend uploaded target", res)
+    console.log("from backend uploaded target", res);
 
-setAim( {
-  email: globalState.email,
-  type: " ",
-  customName: " ",
-  year: new Date().getFullYear(),
-  month: monthNames[new Date().getMonth()],
-  firstDate: 0,
-  lastDate: 0,
-  setTarget: " ",
-}  );
-
-
+    setAim({
+      email: globalState.email,
+      type: " ",
+      customName: " ",
+      year: new Date().getFullYear(),
+      month: monthNames[new Date().getMonth()],
+      firstDate: 0,
+      lastDate: 0,
+      setTarget: " ",
+    });
   }
-
- 
-
 
   async function seekTarget() {
     const customa = { email: globalState.email };
-
     const res = await axios.post("http://localhost:5000/seekTarget", customa);
     setTarget(res.data);
-    console.log("all Target", res.data);
   }
   return (
     <>
@@ -126,7 +112,10 @@ setAim( {
 
             {aim.type === "Custom" && (
               <div>
-                <label htmlFor="label_ida" style={{ fontSize: "20px" }}> Target Name </label>
+                <label htmlFor="label_ida" style={{ fontSize: "20px" }}>
+                  {" "}
+                  Target Name{" "}
+                </label>
                 <input
                   className="target_classa"
                   id="label_ida"
@@ -137,7 +126,10 @@ setAim( {
                   }}
                 />
                 <br />
-                <label htmlFor="label_idb"  style={{ fontSize: "20px" }}> Starting date:</label>
+                <label htmlFor="label_idb" style={{ fontSize: "20px" }}>
+                  {" "}
+                  Starting date:
+                </label>
                 <input
                   className="target_classa"
                   id="label_idb"
@@ -151,7 +143,10 @@ setAim( {
                 />
                 <br />
 
-                <label htmlFor="label_idc" style={{ fontSize: "20px" }}> Ending date:</label>
+                <label htmlFor="label_idc" style={{ fontSize: "20px" }}>
+                  {" "}
+                  Ending date:
+                </label>
                 <input
                   className="target_classa"
                   style={{ fontSize: "20px" }}
@@ -245,26 +240,27 @@ setAim( {
           </form>
         </div>
       </div>
-{/* Target submit form is completed. */}
+      {/* Target submit form is completed. */}
       <hr />
-<div style={{backgroundColor:"blue"}}  >   
-            <h1>Custom Target</h1>
-        <div id="target_idd" >
+      <div style={{ backgroundColor: "blue" }}>
+        <h1>Custom Target</h1>
+        <div id="target_idd">
           {target.map((tar, index) => (
             <>
-              <div key={index} className="target_classb" onClick={()=> { navigate(`/target/${tar.id}`, {state:tar}  )}} >
-                <h3  >{tar.customName}</h3>
-                <p > {tar.target}  </p>
+              <div
+                key={index}
+                className="target_classb"
+                onClick={() => {
+                  navigate(`/target/${tar.id}`, { state: tar });
+                }}
+              >
+                <h3>{tar.customName}</h3>
+                <p> {tar.target} </p>
               </div>
             </>
           ))}
         </div>
-        </div>
+      </div>
     </>
   );
 }
-
-
-
-
-
