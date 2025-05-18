@@ -69,13 +69,15 @@ console.log("first,",status[0]?.id);
   return (
     <>
       <Navbar />
-      <div id="targetida">
-        <h1> {target.customName} </h1>
-      </div>
-
+      
       <div id="targetidb">
         <div id="targetidc">
+          <div id="targetida">
+        <h1> {target.customName} </h1>
+      </div>
+      
           <div id="targetidd">
+
             <div className="targetclassa">
               {" "}
               Starting date of Target: {target.firstDate.slice(0, 10)}{" "}
@@ -86,7 +88,7 @@ console.log("first,",status[0]?.id);
             </div>
           </div>
 
-          <div> {target.target} </div>
+          <div style={{color:"white",fontSize:"25px"}}> {target.target} </div>
 
           <table>
             <thead>
@@ -96,28 +98,30 @@ console.log("first,",status[0]?.id);
               </tr>
             </thead>
             <tbody>
+              {status.map((task, index)=> (
               <tr>
-                <td> {status[0]?.date} </td>
-                <td> {status[0]?.status} </td>
+                <td> {task?.date} </td>
+                <td> {task?.status} </td>
               </tr>
+             ) )}
+  
             </tbody>
           </table> 
-
         </div>
+        <div style={{border:"0.5px solid black"}}  >   </div>
+
         <div id="targetide">
-          <div style={{ backgroundColor: "blue", color: "white" }}>
-            <h3> Upload your PROGRESS</h3>
-          </div>
           <form onSubmit={(e) => uploadStatusHandler(e)}>
-            <label> date: </label>
+            <label style={{fontSize:"25px"}} > Date: </label>
             <input
+            style={{width:"200px",height:"25px", fontSize:"25px", margin:"5px"}}
               type="date"
               onChange={(e) =>
                 setUploadStatus({ ...uploadStatus, date: e.target.value })
               }
             />
             <br />
-            <label> status: </label>
+            <label style={{display:"block",fontSize:"25px"}}> Status: </label>
             <textarea
               id="textida"
               value={uploadStatus.status}
@@ -128,10 +132,12 @@ console.log("first,",status[0]?.id);
               {" "}
             </textarea>
             <br />
-            <button type="submit" style={{ height: "25px", width: "300px" }}>
+<div style={{display:"flex", justifyContent:"center"}}>   
+            <button type="submit" style={{ height: "30px", width: "200px",  }}>
               {" "}
-              update status{" "}
+              Update Status{" "}
             </button>
+ </div>
           </form>
         </div>
       </div>
