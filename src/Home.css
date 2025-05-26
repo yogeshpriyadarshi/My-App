@@ -4,3 +4,21 @@
     text-align: center;
     border-style: solid;
 }
+#task-point{
+    background-color: red;
+    width: 100vw;
+    display: flex;
+
+}
+#major-table{
+    width: 300px;
+flex:1
+}
+#minor-table{
+    width: 300px;
+flex:1
+}
+th,td{
+    width: 50px;
+    color:white;
+}
